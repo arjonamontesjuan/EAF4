@@ -81,14 +81,28 @@ var game = new Phaser.Game(config);
 
 
 /*Declaracion de variables.*/
-var platforms; var background; var decoration;
+var background; 
+var decoration;
+var platforms; 
+
 var player;
 var cursors;
-var screws; var enemy;
+var screws;
+var enemy;
+
 var score = 0;
 var scoreText;
+
 var vgmusic;
+
 var gameOver = false;
+
+var isPlayerLeft = false;
+var playerVelocityX = 128;
+var playerVelocityY = 360;
+
+var isPlayerCrouch = false;
+var isPlayerFall = false;
 
 
 /*Funcion inicial*/
@@ -109,7 +123,7 @@ function preload(){
 	this.load.image("decoration", "../Sprite_Files/Scenarios/Background/decoration.png");
 	this.load.image("ground", "../Sprite_Files/Scenarios/Background/ground_01.png");
 	this.load.image("platform", "../Sprite_Files/Scenarios/Background/platform_01.png");
-	//this.load.image("screws", "../Sprite_Files/Scenarios/Background/screws.png");
+
 
 	/*Carga de los spritesheets.*/
 	this.load.spritesheet("Eric", "../Sprite_Files/Characters/Spritesheet/Eric_Spritesheet.png", {frameWidth: 32, frameHeight: 48});
@@ -171,7 +185,6 @@ function preload(){
 function create(){
 
 	//console.log("create");
-	//game.physics.startSystem(Phaser.Physics.ARCADE);
 
 	/*Creacion de las imagenes.*/
 	this.background = this.add.image(this.width, this.height, "background");
@@ -265,6 +278,10 @@ function create(){
 	//this.player.gravity.y = 300;
 	//this.player.body.setGravityY(300);
 	player.setCollideWorldBounds(true);
+
+
+	/*Escalado de jugador.*/
+	player.setScale(2);
 	
 
 	/*Creacion de colisiones del jugador.*/
@@ -276,11 +293,11 @@ function create(){
     screws = this.physics.add.group({
         key: "Assets",
         repeat: 12,
-        setXY: { x: 12, y: 0, stepX: 70 }
+        setXY: { x: 20, y: 0, stepX: 70 }
     });
 
     screws.children.iterate(function (child) {
-        child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
+        child.setBounceY(Phaser.Math.FloatBetween(0.2, 0.4));
     });
 
 
@@ -289,132 +306,167 @@ function create(){
 	this.physics.add.overlap(player, screws, collectScrew, null, this);
 
 
-	/*Creacion de las animaciones.*/
+	/*Creacion de las animaciones del personaje.*/
+	/*Agacharse.*/
 	this.anims.create({
 		key: "crouchleft",
-		frames: this.anims.generateFrameNumbers("Eric", {start: 1, end: 5}),
+		frames: this.anims.generateFrameNumbers("Eric", {start: 1, end: 4}),
 		framerate: 4,
+		repeat: 0,
 	});
 
 	this.anims.create({
 		key: "standleft",
-		frames: this.anims.generateFrameNumbers("Eric", {start: 6, end: 9}),
+		frames: this.anims.generateFrameNumbers("Eric", {start: 5, end: 9}),
 		framerate: 4,
+		repeat: 0,
 	});
 
 	this.anims.create({
 		key: "crouchright",
-		frames: this.anims.generateFrameNumbers("Eric", {start: 10, end: 14}),
+		frames: this.anims.generateFrameNumbers("Eric", {start: 11, end: 15}),
 		framerate: 4,
+		repeat: 0,
 	});
 
 	this.anims.create({
 		key: "standright",
-		frames: this.anims.generateFrameNumbers("Eric", {start: 15, end: 18}),
+		frames: this.anims.generateFrameNumbers("Eric", {start: 15, end: 19}),
 		framerate: 4,
+		repeat: 0,
 	});
 
+	this.anims.create({
+        key: "turncrouchleft",
+        frames: [ { key: "Eric", frame: 15 } ],
+        frameRate: 2,
+        repeat: 0,
+    });
 
+    this.anims.create({
+        key: "turncrouchright",
+        frames: [ { key: "Eric", frame: 5 } ],
+        frameRate: 2,
+        repeat: 0,
+    });
+
+
+	/*Idle.*/
 	this.anims.create({
 		key: "idle1left",
-		frames: this.anims.generateFrameNumbers("Eric", {start: 19, end: 30}),
-		framerate: 12,
+		frames: this.anims.generateFrameNumbers("Eric", {start: 20, end: 31}),
+		framerate: 2,
 		repeat: -1,
 	});
 
 	this.anims.create({
 		key: "idle1right",
-		frames: this.anims.generateFrameNumbers("Eric", {start: 31, end: 42}),
-		framerate: 12,
+		frames: this.anims.generateFrameNumbers("Eric", {start: 32, end: 43}),
+		framerate: 2,
 		repeat: -1,
 	});
 
 	this.anims.create({
 		key: "idle2left",
-		frames: this.anims.generateFrameNumbers("Eric", {start: 43, end: 52}),
-		framerate: 12,
+		frames: this.anims.generateFrameNumbers("Eric", {start: 44, end: 53}),
+		framerate: 2,
 		repeat: -1,
 	});
 
 	this.anims.create({
 		key: "idle2right",
-		frames: this.anims.generateFrameNumbers("Eric", {start: 53, end: 62}),
-		framerate: 12,
+		frames: this.anims.generateFrameNumbers("Eric", {start: 54, end: 63}),
+		framerate: 2,
 		repeat: -1,
 	});
 
 
+	/*Saltar.*/
 	this.anims.create({
 		key: "jumpleft",
-		frames: this.anims.generateFrameNumbers("Eric", {start: 63, end: 68}),
+		frames: this.anims.generateFrameNumbers("Eric", {start: 65, end: 69}),
 		framerate: 4,
+		repeat: 0,
 	});
 
 	this.anims.create({
 		key: "fallleft",
-		frames: this.anims.generateFrameNumbers("Eric", {start: 68, end: 74}),
+		frames: this.anims.generateFrameNumbers("Eric", {start: 69, end: 74}),
 		framerate: 4,
+		repeat: 0,
 	});
-
 
 	this.anims.create({
 		key: "jumpright",
-		frames: this.anims.generateFrameNumbers("Eric", {start: 75, end: 80}),
+		frames: this.anims.generateFrameNumbers("Eric", {start: 77, end: 81}),
 		framerate: 4,
+		repeat: 0,
 	});
 
 	this.anims.create({
 		key: "fallright",
-		frames: this.anims.generateFrameNumbers("Eric", {start: 80, end: 86}),
+		frames: this.anims.generateFrameNumbers("Eric", {start: 81, end: 86}),
 		framerate: 4,
+		repeat: 0,
 	});
 
 
+	/*Girarse.*/
 	this.anims.create({
 		key: "turnleft",
-		frames: this.anims.generateFrameNumbers("Eric", {start: 87, end: 90}),
+		frames: this.anims.generateFrameNumbers("Eric", {start: 88, end: 91}),
 		framerate: 4,
+		repeat: 0,
 	});
-
 
 	this.anims.create({
 		key: "turnright",
-		frames: this.anims.generateFrameNumbers("Eric", {start: 91, end: 94}),
+		frames: this.anims.generateFrameNumbers("Eric", {start: 92, end: 95}),
 		framerate: 4,
+		repeat: 0,
 	});
 
 
+	/*Caminar.*/
 	this.anims.create({
 		key: "walkleft",
-		frames: this.anims.generateFrameNumbers("Eric", {start: 96, end: 108}),
-		framerate: 12,
+		frames: this.anims.generateFrameNumbers("Eric", {start: 96, end: 109}),
+		framerate: 14,
 		repeat: 0,
 	});
 
 	this.anims.create({
 		key: "walkright",
-		frames: this.anims.generateFrameNumbers("Eric", {start: 110, end: 122}),
-		framerate: 12,
+		frames: this.anims.generateFrameNumbers("Eric", {start: 110, end: 121}),
+		framerate: 14,
 		repeat: 0,
 	});
+
+
+	// this.anims.create({
+	// 	key: "screwA",
+	// 	frames: this.anims.generateFrameNumbers("Assets", {start: 0, end: 8}),
+	// 	framerate: 10,
+	// 	repeat: -1,
+	// });
+
+	// this.anims.create({
+	// 	key: "screwB",
+	// 	frames: this.anims.generateFrameNumbers("Assets", {start: 9, end: 17}),
+	// 	framerate: 10,
+	// 	repeat: -1,
+	// });
 
 
 	/*Creacion de controles de teclado.*/
 	cursors = this.input.keyboard.createCursorKeys();
 
 
-	
-
-
 	/*Creacion del marcador.*/
-	scoreText = this.add.text(16, 16, "Score: 0", { fontSize: "24px", fill: "#000" });
+	scoreText = this.add.text(16, 16, "Score: 0", { fontFamily: "Verdana", fontSize: "24px", fill: "#fff" });
 
 
-	/*Escalado de jugador.*/
-	player.setScale(2);
-	//player.refreshBody();
-
-
+	/*Opciones de camara.*/
 	//this.camera.follow(player);
 
 }
@@ -435,24 +487,133 @@ function update(){
 
 	//console.log("update");
 
-	/*Funciones del teclado.*/
-	if (cursors.left.isDown) {
-		player.setVelocityX(-160);
+	/*Caminar a izquierda y derecha.*/
+	if ((cursors.left.isDown) && (isPlayerLeft)){
+		player.setVelocityX(-playerVelocityX);
 		player.anims.play("walkleft", true);
-	} else if (cursors.right.isDown) {
-		player.setVelocityX(160);
+		//isPlayerLeft = true;
+
+		console.log("Left: " + isPlayerLeft);
+
+	} else if ((cursors.left.isDown) && !(isPlayerLeft)){
+		player.setVelocityX(0);
+		player.anims.play("turnleft",true);
+		isPlayerLeft = true;
+		player.setVelocityX(-playerVelocityX);
+		player.anims.play("walkleft", true);
+
+		console.log("Left: " + isPlayerLeft);
+
+	} else if ((cursors.right.isDown) && (isPlayerLeft)){
+		player.setVelocityX(0);
+		player.anims.play("turnright",true);
+		isPlayerLeft = false;
+		player.setVelocityX(playerVelocityX);
 		player.anims.play("walkright", true);
-	} else if (cursors.down.isDown){
-		player.setVelocityX(0);
-		//player.anims.play("crouchleft", true);
+
+		console.log("Left: " + isPlayerLeft);
+
+	} else if ((cursors.right.isDown) && !(isPlayerLeft)){
+		player.setVelocityX(playerVelocityX);
+		player.anims.play("walkright", true);
+		//isPlayerLeft = false;
+
+		console.log("Left: " + isPlayerLeft);
+
+
 	} else {
+
+		/*Quedarse quieto.*/
 		player.setVelocityX(0);
-		player.anims.play("idle1left", true);
+
+		if (isPlayerLeft){
+			player.anims.play("idle1left", true);
+			//isPlayerLeft = true;
+
+		} else {
+			player.anims.play("idle1right", true);
+			//isPlayerLeft = false;
+		}
+
 	}
 
-	if (cursors.up.isDown && player.body.touching.down){
-		player.setVelocityY(-360);
+
+	/*Agacharse.*/
+	if (cursors.down.isDown) {
+
+		player.setVelocityX(0);
+		isPlayerCrouch = true;
+
+		if (isPlayerLeft) {
+			player.anims.play("crouchleft", true);
+
+			console.log("Crouch: " + isPlayerCrouch);
+
+		} else {
+			player.anims.play("crouchright", true);
+
+			console.log("Crouch: " + isPlayerCrouch);
+		} 
+
+
+		/*Girarse agachado.*/
+		if ((cursors.left.isDown) && (isPlayerLeft)){
+			console.log("Left: " + isPlayerLeft);
+
+		} else if ((cursors.left.isDown) && (!(isPlayerLeft))){
+			player.anims.play("turncrouchleft", true);
+			isPlayerLeft = true;
+
+			console.log("Left: " + isPlayerLeft);
+
+		} else if ((cursors.right.isDown) && (isPlayerLeft)){
+			player.anims.play("turncrouchright", true);
+			isPlayerLeft = true;
+
+			console.log("Left: " + isPlayerLeft);
+
+		} else if ((cursors.right.isDown) && (!(isPlayerLeft))){
+
+			console.log("Left: " + isPlayerLeft);
+		}
+
+	} else {
+
+		/*Levangtarse.*/
+		if (isPlayerCrouch){
+
+			isPlayerCrouch = false;
+
+			if (isPlayerLeft)  {
+				player.anims.play("standleft", true);
+
+				console.log("Crouch: " + isPlayerCrouch);
+
+			} else {
+				player.anims.play("standright", true);
+
+				console.log("Crouch: " + isPlayerCrouch);
+			}
+		}
+
 	}
+
+
+	/*Saltar.*/
+	if (cursors.up.isDown && player.body.touching.down && (isPlayerLeft)){
+		player.setVelocityY(-playerVelocityY);
+		player.anims.play("jumpleft", true);
+		isPlayerFall = false;
+
+	} else if (cursors.up.isDown && player.body.touching.down && !(isPlayerLeft)){
+		player.setVelocityY(-playerVelocityY);
+		player.anims.play("jumpright", true);
+		isPlayerFall = false;
+
+	}
+
+
+	//screws.children.anims.play("screwB");
 
 }
 
