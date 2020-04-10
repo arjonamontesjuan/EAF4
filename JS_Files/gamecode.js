@@ -603,13 +603,32 @@ function update(){
 	if (cursors.up.isDown && player.body.touching.down && (isPlayerLeft)){
 		player.setVelocityY(-playerVelocityY);
 		player.anims.play("jumpleft", true);
-		isPlayerFall = false;
 
 	} else if (cursors.up.isDown && player.body.touching.down && !(isPlayerLeft)){
 		player.setVelocityY(-playerVelocityY);
 		player.anims.play("jumpright", true);
-		isPlayerFall = false;
 
+	}
+
+
+	/*Caer.*/
+	if (player.body.velocity.y > 0){
+
+		isPlayerFall = true;
+
+		if (isPlayerLeft) {
+			player.anims.play("fallleft", true);
+
+			console.log("Crouch: " + isPlayerFall);
+
+		} else {
+			player.anims.play("fallright", true);
+
+			console.log("Crouch: " + isPlayerFall);
+		} 
+
+	} else {
+		isPlayerFall = false;
 	}
 
 
