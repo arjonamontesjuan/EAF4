@@ -1,0 +1,50 @@
+/*Encabezamientos.*/
+h1{
+	/*Color.*/
+	color: yellow;
+}
+
+
+/*Canvas del videojuego.*/
+div.divcanvas{
+
+	/*Tamaño.*/
+	width: 1260px;
+	min-width: 800px;
+	height: 600px;
+	min-height: 600px;
+
+	/*Margenes*/
+	margin: 20px;
+	/*padding-left: 20px;*/
+
+	/*Posicion.*/
+	text-align: center;
+	position: middle;
+	vertical-align: center;
+	/*align-content: center;*/
+	/*display: block;*/
+
+	/*Color.*/
+	/*border: 5px solid red;*/
+
+}
+
+
+#videogamecanvas canvas{
+
+	/*Tamaño.*/
+	width: 100%;
+	height: 100%;
+
+	/*Margenes*/
+	/*padding-left: 0px;*/
+	/*margin: auto;*/
+
+	/*Posicion.*/
+	display: block;
+	/*text-align: right;*/
+	position: flex;
+	/*vertical-align: center;*/
+
+}

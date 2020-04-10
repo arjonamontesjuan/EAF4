@@ -1,0 +1,262 @@
+/ GamePlayManager = {
+	
+// 	init: function(){
+// 		console.log("init");
+// 	}
+
+// 	/*Carga todos los recursos*/
+// 	preload: function(){
+// 		console.log("preload");
+// 		this.load.image("Eric_Spritesheet", "../Sprite_Files/Characters/Spritesheet/Eric_Spritesheet.png");
+// 	}
+
+// 	/*Crea todos los recursos*/
+// 	create: function(){
+// 		console.log("create");
+// 	}
+
+// 	/*Actualiza la pantalla y el estado del videojuego*/
+// 	update: function(){
+// 		console.log("update");
+// 	}
+// }
+
+
+var canvas = document.getElementById("videogamecanvas");
+
+
+
+/*Variable de configuracion del juego.*/
+var config = {
+	type: Phaser.AUTO,
+	width: 800,
+	height: 600,
+	antialias: false,
+	physics: {
+		default: "arcade",
+		arcade: {
+			gravity: {x: 0, y: 300},
+			debug: false
+		}
+	},
+	scene: {
+		init: init,
+        preload: preload,
+        create: create,
+        update: update
+	},
+	scale: {
+		parent: "canvas",
+		autoCenter: Phaser.Scale.CENTER_BOTH
+	}
+}
+
+
+var platforms;
+var player;
+var cursors;
+var screws;
+var score = 0;
+var scoreText;
+
+var gameOver = false;
+
+var game = new Phaser.Game(config);
+
+
+function init(){
+	//console.log("init");
+}
+
+
+/*Carga todos los recursos*/
+function preload(){
+	//console.log("preload");
+
+	this.load.image("background", "../Sprite_Files/Scenarios/Background/background.png");
+	this.load.image("decoration", "../Sprite_Files/Scenarios/Background/decoration.png");
+	this.load.image("ground", "../Sprite_Files/Scenarios/Background/ground_01.png");
+	this.load.image("platform", "../Sprite_Files/Scenarios/Background/platform_01.png");
+	this.load.image("screws", "../Sprite_Files/Scenarios/Background/screws.png");
+
+	this.load.spritesheet("Eric", "../Sprite_Files/Characters/Spritesheet/Eric_Spritesheet.png", {frameWidth: 32, frameHeight: 48});
+	//this.load.json("Eric", "../Sprite_Files/Characters/Spritesheet/Eric_Spritesheet.png", "../Sprite_Files/Characters/Spritesheet/Eric_Spritesheet.json");
+
+	this.load.spritesheet("Assets", "../Sprite_Files/Assets/Spritesheet/Assets_Spritesheet.png", {frameWidth: 32, frameHeight: 32});
+	//this.load.json("Assets", "../Sprite_Files/Assets/Spritesheet/Assets_Spritesheet.png", "../Sprite_Files/Assets/Spritesheet/Assets_Spritesheet.json");
+
+	this.load.spritesheet("BallBot", "../Sprite_Files/Enemies/Spritesheet/BallBot_Spritesheet.png", {frameWidth: 33, frameHeight: 38});
+	//this.load.json("BallBot", "../Sprite_Files/Enemies/Spritesheet/BallBot_Spritesheet.png", "../Sprite_Files/Enemies/Spritesheet/BallBot_Spritesheet.json");
+
+	this.load.spritesheet("ClawBot", "../Sprite_Files/Enemies/Spritesheet/ClawBot_Spritesheet.png", {frameWidth: 41, frameHeight: 26});
+	//this.load.json("ClawBot", "../Sprite_Files/Enemies/Spritesheet/ClawBot_Spritesheet.png", "../Sprite_Files/Enemies/Spritesheet/ClawBot_Spritesheet.json");
+
+	this.load.spritesheet("GunBot", "../Sprite_Files/Enemies/Spritesheet/GunBot_Spritesheet.png", {frameWidth: 66, frameHeight: 46});
+	//this.load.json("GunBot", "../Sprite_Files/Enemies/Spritesheet/GunBot_Spritesheet.png", "../Sprite_Files/Enemies/Spritesheet/GunBot_Spritesheet.json");
+
+}
+
+
+/*Crea todos los recursos*/
+function create(){
+	//console.log("create");
+
+	this.add.image(this.width, this.height, "background").setOrigin(0,0).setScale(2.1);
+	this.add.image(this.width, this.height, "decoration").setOrigin(0,0).setScale(1.97);
+	//this.add.image(this.width, 536, "ground").setOrigin(0,0).setScale(1);
+	//this.add.image(500, 350, "platform").setOrigin(0,0);
+
+
+	platforms = this.physics.add.staticGroup();
+
+	platforms.create(this.width, 536, "ground").setOrigin(0,0).refreshBody();
+
+	platforms.create(0, 350, "platform").setOrigin(0,0).refreshBody();
+	platforms.create(500, 350, "platform").setOrigin(0,0).refreshBody();
+	platforms.create(628, 350, "platform").setOrigin(0,0).refreshBody();
+	platforms.create(250, 280, "platform").setOrigin(0,0).refreshBody();
+
+
+	let spritesheetEric = this.cache.json.get("Eric");
+	let spritesheetAssets = this.cache.json.get("Assets");
+	let spritesheetBallBot = this.cache.json.get("BallBot");
+	let spritesheetClawBot = this.cache.json.get("ClawBot");
+	let spritesheetGunBot = this.cache.json.get("GunBot");
+
+
+	player = this.physics.add.sprite(300, 100, "Eric");
+
+	player.setBounce(0.1);
+	//player.gravity.y = 300;
+	//player.body.setGravityY(300);
+	player.setColliderWorldBounds(true);
+
+
+	this.anims.create({
+		key: "left",
+		frames: this.anims.generateFrameNumbers("Eric", {start: 0, end: 3}),
+		framerate: 12,
+		repeat: -1,
+	});
+
+	this.anims.create({
+		key: "right",
+		frames: this.anims.generateFrameNumbers("Eric", {start: 4, end: 8}),
+		framerate: 12,
+		repeat: -1,
+	});
+
+
+	this.anims.create({
+		key: "turnleft",
+		frames: this.anims.generateFrameNumbers("Eric", {start: 9, end: 13}),
+		framerate: 4,
+	});
+
+
+	this.anims.create({
+		key: "turnright",
+		frames: this.anims.generateFrameNumbers("Eric", {start: 14, end: 17}),
+		framerate: 4,
+	});
+
+
+	this.anims.create({
+		key: "crouchleft",
+		frames: this.anims.generateFrameNumbers("Eric", {start: 18, end: 21}),
+		framerate: 4,
+	});
+
+
+	this.anims.create({
+		key: "crouchright",
+		frames: this.anims.generateFrameNumbers("Eric", {start: 22, end: 25}),
+		framerate: 4,
+	});
+
+
+	cursors = this.input.keyboard.createCursorKeys();
+
+    screws = this.physics.add.group({
+        key: "screw",
+        repeat: 12,
+        setXY: { x: 12, y: 0, stepX: 70 }
+    });
+
+    screws.children.iterate(function (child) {
+        child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
+    });
+
+    scoreText = this.add.text(16, 16, "score: 0", { fontSize: "24px", fill: "#000" });
+
+	this.physics.add.collider(player, ground);
+	this.physics.add.collider(player, platforms);
+	this.physics.add.collider(screws, platforms);
+
+	this.physics.add.overlap(player, stars, collectScrew, null, this);
+}
+
+
+function collectScrew (player, screw){
+    screw.disableBody(true, true);
+
+    score += 25;
+    scoreText.setText("Score: " + score);
+}
+
+
+/*Actualiza la pantalla y el estado del videojuego*/
+function update(){
+	//console.log("update");
+
+	if (cursors.left.isDown) {
+		player.setVelocityX(-160);
+		player.anims.play("left", true);
+	} else if (cursors.left.isDown) {
+		player.setVelocityX(160);
+		player.anims.play("right", true);
+	} else if (cursors.down.isDown){
+		player.setVelocityX(0);
+		player.anims.play("crouchleft", true);
+	} else {
+		player.setVelocityX(0);
+	}
+
+	if (cursors.up.isDown && player.body.touching.down){
+		player.setVelocityY(-330);
+	}
+
+}
+
+
+/*Actualiza la pantalla y el estado del videojuego*/
+function render(){
+	//console.log("render");
+}
+
+
+/*Variable del canvas.*/
+//var vgcanvas = document.getElementById("videogamecanvas");
+
+function initGame(){
+
+	/*alert("Game!");*/
+
+	/*Nueva instancia del juego.*/
+	/*var game = new Phaser.Game(config);*/
+}
+
+
+// game.state.add("gameplay");
+// game.state.start("gameplay");
+
+
+/*var ctx = canvas.getContext("2d");*/
+
+
+// ctx.msImageSmoothingEnabled = false;
+// ctx.mozImageSmoothingEnabled = false;
+// ctx.webkitImageSmoothingEnabled = false;
+// ctx.imageSmoothingEnabled = false;
+
+

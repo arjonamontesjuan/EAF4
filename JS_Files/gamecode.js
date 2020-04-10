@@ -1,0 +1,468 @@
+// GamePlayManager = {
+	
+// 	init: function(){
+// 		console.log("init");
+// 	}
+
+// 	/*Carga todos los recursos*/
+// 	preload: function(){
+// 		console.log("preload");
+// 	}
+
+// 	/*Crea todos los recursos*/
+// 	create: function(){
+// 		console.log("create");
+// 	}
+
+// 	/*Actualiza la pantalla y el estado del videojuego*/
+// 	update: function(){
+// 		console.log("update");
+// 	}
+// }
+
+
+/*Variable del canvas.*/
+const vgcanvas = "videogamecontainer";
+//var ctx = vgcanvas.getContext("2d");
+
+// ctx.msImageSmoothingEnabled = false;
+// ctx.mozImageSmoothingEnabled = false;
+// ctx.webkitImageSmoothingEnabled = false;
+// ctx.imageSmoothingEnabled = false;
+
+
+/*Variable de configuracion del juego.*/
+var config = {
+
+	/*Tipo de render*/
+	type: Phaser.AUTO,
+
+	/*Medidas del canvas*/
+	width: 1024,
+	height: 600,
+
+	/*Container*/
+	parent: vgcanvas,
+
+	/*Antialising de pixels.*/
+	antialias: false,
+
+	/*Motor de fisica.*/
+	physics: {
+		default: "arcade",
+		arcade: {
+			gravity: {x: 0, y: 300},
+			debug: false
+		}
+	},
+
+	/*Funciones principales*/
+	scene: {
+		init: init,
+        preload: preload,
+        create: create,
+        update: update
+	},
+
+	/*Escala de escena.*/
+	scale: {
+		//canvas: vgcanvas,
+		autoCenter: Phaser.Scale.CENTER_BOTH
+	}
+}
+
+
+/*Inicializacion de variable del juego.*/
+var game = new Phaser.Game(config);
+
+//this.game.scale.pageAlignHorizontally = true;
+//this.game.scale.pageAlignVertically = true;
+//this.game.scale.refresh();
+
+
+/*Declaracion de variables.*/
+var platforms; var background; var decoration;
+var player;
+var cursors;
+var screws; var enemy;
+var score = 0;
+var scoreText;
+var vgmusic;
+var gameOver = false;
+
+
+/*Funcion inicial*/
+function init(){
+	//console.log("init");
+
+	//alert("Game!");
+}
+
+
+/*Carga todos los recursos*/
+function preload(){
+
+	//console.log("preload");
+
+	/*Carga de los archivos de imagen.*/
+	this.load.image("background", "../Sprite_Files/Scenarios/Background/background.png");
+	this.load.image("decoration", "../Sprite_Files/Scenarios/Background/decoration.png");
+	this.load.image("ground", "../Sprite_Files/Scenarios/Background/ground_01.png");
+	this.load.image("platform", "../Sprite_Files/Scenarios/Background/platform_01.png");
+	//this.load.image("screws", "../Sprite_Files/Scenarios/Background/screws.png");
+
+	/*Carga de los spritesheets.*/
+	this.load.spritesheet("Eric", "../Sprite_Files/Characters/Spritesheet/Eric_Spritesheet.png", {frameWidth: 32, frameHeight: 48});
+	//this.load.json("Eric", "../Sprite_Files/Characters/Spritesheet/Eric_Spritesheet.png", "../Sprite_Files/Characters/Spritesheet/Eric_Spritesheet.json");
+
+	this.load.spritesheet("Assets", "../Sprite_Files/Assets/Spritesheet/Assets_Spritesheet.png", {frameWidth: 32, frameHeight: 32});
+	//this.load.json("Assets", "../Sprite_Files/Assets/Spritesheet/Assets_Spritesheet.png", "../Sprite_Files/Assets/Spritesheet/Assets_Spritesheet.json");
+
+	this.load.spritesheet("BallBot", "../Sprite_Files/Enemies/Spritesheet/BallBot_Spritesheet.png", {frameWidth: 33, frameHeight: 38});
+	//this.load.json("BallBot", "../Sprite_Files/Enemies/Spritesheet/BallBot_Spritesheet.png", "../Sprite_Files/Enemies/Spritesheet/BallBot_Spritesheet.json");
+
+	this.load.spritesheet("ClawBot", "../Sprite_Files/Enemies/Spritesheet/ClawBot_Spritesheet.png", {frameWidth: 41, frameHeight: 26});
+	//this.load.json("ClawBot", "../Sprite_Files/Enemies/Spritesheet/ClawBot_Spritesheet.png", "../Sprite_Files/Enemies/Spritesheet/ClawBot_Spritesheet.json");
+
+	this.load.spritesheet("GunBot", "../Sprite_Files/Enemies/Spritesheet/GunBot_Spritesheet.png", {frameWidth: 66, frameHeight: 46});
+	//this.load.json("GunBot", "../Sprite_Files/Enemies/Spritesheet/GunBot_Spritesheet.png", "../Sprite_Files/Enemies/Spritesheet/GunBot_Spritesheet.json");
+
+
+	/*Carga los archivos de musica y sonidos FX.*/
+	this.load.audio("music", "../Audio_Files/Music/Quirky-Runner_Looping.mp3");
+
+	this.load.audio("Clank_01", "../Audio_Files/SFX/Clank_1.mp3");
+	this.load.audio("Clank_02", "../Audio_Files/SFX/Clank_2.mp3");
+	this.load.audio("Clank_03", "../Audio_Files/SFX/Clank_3.mp3");
+	this.load.audio("Clank_04", "../Audio_Files/SFX/Clank_4.mp3");
+	this.load.audio("Clank_05", "../Audio_Files/SFX/Clank_5.mp3");
+	this.load.audio("Clank_06", "../Audio_Files/SFX/Clank_6.mp3");
+	this.load.audio("Clank_07", "../Audio_Files/SFX/Clank_7.mp3");
+	this.load.audio("Clank_08", "../Audio_Files/SFX/Clank_8.mp3");
+	this.load.audio("Clank_09", "../Audio_Files/SFX/Clank_9.mp3");
+	this.load.audio("Clank_10", "../Audio_Files/SFX/Clank_10.mp3");
+
+	this.load.audio("Laser-Ricochet1", "../Audio_Files/SFX/Laser-Ricochet1.mp3");
+	this.load.audio("Laser-Ricochet2", "../Audio_Files/SFX/Laser-Ricochet2.mp3");
+	this.load.audio("Laser-Ricochet3", "../Audio_Files/SFX/Laser-Ricochet3.mp3");
+
+	this.load.audio("Laser-Shot1", "../Audio_Files/SFX/Laser-Shot1.mp3");
+	this.load.audio("Laser-Shot2", "../Audio_Files/SFX/Laser-Shot2.mp3");
+	this.load.audio("Laser-Shot3", "../Audio_Files/SFX/Laser-Shot3.mp3");
+
+	this.load.audio("RezAlert1", "../Audio_Files/SFX/RezAlert1.mp3");
+	this.load.audio("RezAlert2", "../Audio_Files/SFX/RezAlert2.mp3");
+	this.load.audio("RezAlert3", "../Audio_Files/SFX/RezAlert3.mp3");
+	this.load.audio("RezAlert4", "../Audio_Files/SFX/RezAlert4.mp3");
+
+	this.load.audio("Robot-Footstep_1", "../Audio_Files/SFX/Robot-Footstep_1.mp3");
+	this.load.audio("Robot-Footstep_2", "../Audio_Files/SFX/Robot-Footstep_2.mp3");
+	this.load.audio("Robot-Footstep_3", "../Audio_Files/SFX/Robot-Footstep_3.mp3");
+	this.load.audio("Robot-Footstep_4", "../Audio_Files/SFX/Robot-Footstep_4.mp3");
+	this.load.audio("Robot-Footstep_5", "../Audio_Files/SFX/Robot-Footstep_5.mp3");
+	this.load.audio("Robot-Footstep_6", "../Audio_Files/SFX/Robot-Footstep_6.mp3");
+	this.load.audio("Robot-Footstep_7", "../Audio_Files/SFX/Robot-Footstep_7.mp3");
+	this.load.audio("Robot-Footstep_8", "../Audio_Files/SFX/Robot-Footstep_8.mp3");
+
+}
+
+
+/*Crea todos los recursos*/
+function create(){
+
+	//console.log("create");
+	//game.physics.startSystem(Phaser.Physics.ARCADE);
+
+	/*Creacion de las imagenes.*/
+	this.background = this.add.image(this.width, this.height, "background");
+	this.background.setOrigin(0,0);
+	this.background.setScale(2.1);
+
+	this.decoration = this.add.image(this.width, this.height, "decoration");
+	this.decoration.setOrigin(0,0);
+	this.decoration.setScale(1.97);
+	//this.add.image(this.width, 536, "ground").setOrigin(0,0).setScale(1);
+	//this.add.image(500, 350, "platform").setOrigin(0,0);
+
+
+	/*Creacion de los spritesheets en cache.*/
+	let spritesheetEric = this.cache.json.get("Eric");
+	let spritesheetAssets = this.cache.json.get("Assets");
+	let spritesheetBallBot = this.cache.json.get("BallBot");
+	let spritesheetClawBot = this.cache.json.get("ClawBot");
+	let spritesheetGunBot = this.cache.json.get("GunBot");
+
+
+	/*Creacion de la musica y los efectos de sonido.*/
+	vgmusic = this.sound.add("music");
+	var musicConfig = {
+		mute: false,
+		volume: 0.0,
+		rate: 1,
+		detune: 0,
+		seek: 0,
+		loop: true,
+		delay: 0
+	}
+	vgmusic.play(musicConfig);
+
+
+	// this.clankSound01 = this.sound.add("Clank_01");
+	// this.clankSound02 = this.sound.add("Clank_02");
+	// this.clankSound03 = this.sound.add("Clank_03");
+	// this.clankSound04 = this.sound.add("Clank_04");
+	// this.clankSound05 = this.sound.add("Clank_05");
+	// this.clankSound06 = this.sound.add("Clank_06");
+	// this.clankSound07 = this.sound.add("Clank_07");
+	// this.clankSound08 = this.sound.add("Clank_08");
+	// this.clankSound09 = this.sound.add("Clank_09");
+	// this.clankSound10 = this.sound.add("Clank_10");
+
+	// this.laserRicoSound01 = this.sound.add("Laser-Ricochet1");
+	// this.laserRicoSound02 = this.sound.add("Laser-Ricochet2");
+	// this.laserRicoSound03 = this.sound.add("Laser-Ricochet3");
+
+	// this.laserShotSound01 = this.sound.add("Laser-Shot1");
+	// this.laserShotSound02 = this.sound.add("Laser-Shot2");
+	// this.laserShotSound03 = this.sound.add("Laser-Shot3");
+
+	// this.rezAlertSound01 = this.sound.add("RezAlert1");
+	// this.rezAlertSound02 = this.sound.add("RezAlert2");
+	// this.rezAlertSound03 = this.sound.add("RezAlert3");
+	// this.rezAlertSound04 = this.sound.add("RezAlert4");
+
+	// this.footStepSound01 = this.sound.add("Robot-Footstep_1");
+	// this.footStepSound02 = this.sound.add("Robot-Footstep_2");
+	// this.footStepSound03 = this.sound.add("Robot-Footstep_3");
+	// this.footStepSound04 = this.sound.add("Robot-Footstep_4");
+	// this.footStepSound05 = this.sound.add("Robot-Footstep_5");
+	// this.footStepSound06 = this.sound.add("Robot-Footstep_6");
+	// this.footStepSound07 = this.sound.add("Robot-Footstep_7");
+	// this.footStepSound08 = this.sound.add("Robot-Footstep_8");
+
+
+	//this.beamSound = this.sound.add("Laser-Shot1");
+	//this.pickupSound = this.sound.add("RezAlert1");
+
+
+	/*Creacion de las instancias de suelo y plataformas fisicas.*/
+	platforms = this.physics.add.staticGroup();
+
+	platforms.create(0, 536, "ground").setOrigin(0,0).refreshBody();
+
+	platforms.create(0, 352, "platform").setOrigin(0,0).refreshBody();
+	platforms.create(500, 352, "platform").setOrigin(0,0).refreshBody();
+	platforms.create(628, 352, "platform").setOrigin(0,0).refreshBody();
+	platforms.create(250, 280, "platform").setOrigin(0,0).refreshBody();
+
+
+	/*Creacion de instancia jugador.*/
+	player = this.physics.add.sprite(200, 192, "Eric");
+
+
+	/*Propiedades fisicas de jugador.*/
+	player.setBounce(0.1);
+	//this.player.gravity.y = 300;
+	//this.player.body.setGravityY(300);
+	player.setCollideWorldBounds(true);
+	
+
+	/*Creacion de colisiones del jugador.*/
+	//this.physics.add.collider(player, ground);
+	this.physics.add.collider(player, platforms);
+
+
+	/*Creacion de assets.*/
+    screws = this.physics.add.group({
+        key: "Assets",
+        repeat: 12,
+        setXY: { x: 12, y: 0, stepX: 70 }
+    });
+
+    screws.children.iterate(function (child) {
+        child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
+    });
+
+
+    /*Creacion de colisiones de los assets.*/
+	this.physics.add.collider(screws, platforms);
+	this.physics.add.overlap(player, screws, collectScrew, null, this);
+
+
+	/*Creacion de las animaciones.*/
+	this.anims.create({
+		key: "crouchleft",
+		frames: this.anims.generateFrameNumbers("Eric", {start: 1, end: 5}),
+		framerate: 4,
+	});
+
+	this.anims.create({
+		key: "standleft",
+		frames: this.anims.generateFrameNumbers("Eric", {start: 6, end: 9}),
+		framerate: 4,
+	});
+
+	this.anims.create({
+		key: "crouchright",
+		frames: this.anims.generateFrameNumbers("Eric", {start: 10, end: 14}),
+		framerate: 4,
+	});
+
+	this.anims.create({
+		key: "standright",
+		frames: this.anims.generateFrameNumbers("Eric", {start: 15, end: 18}),
+		framerate: 4,
+	});
+
+
+	this.anims.create({
+		key: "idle1left",
+		frames: this.anims.generateFrameNumbers("Eric", {start: 19, end: 30}),
+		framerate: 12,
+		repeat: -1,
+	});
+
+	this.anims.create({
+		key: "idle1right",
+		frames: this.anims.generateFrameNumbers("Eric", {start: 31, end: 42}),
+		framerate: 12,
+		repeat: -1,
+	});
+
+	this.anims.create({
+		key: "idle2left",
+		frames: this.anims.generateFrameNumbers("Eric", {start: 43, end: 52}),
+		framerate: 12,
+		repeat: -1,
+	});
+
+	this.anims.create({
+		key: "idle2right",
+		frames: this.anims.generateFrameNumbers("Eric", {start: 53, end: 62}),
+		framerate: 12,
+		repeat: -1,
+	});
+
+
+	this.anims.create({
+		key: "jumpleft",
+		frames: this.anims.generateFrameNumbers("Eric", {start: 63, end: 68}),
+		framerate: 4,
+	});
+
+	this.anims.create({
+		key: "fallleft",
+		frames: this.anims.generateFrameNumbers("Eric", {start: 68, end: 74}),
+		framerate: 4,
+	});
+
+
+	this.anims.create({
+		key: "jumpright",
+		frames: this.anims.generateFrameNumbers("Eric", {start: 75, end: 80}),
+		framerate: 4,
+	});
+
+	this.anims.create({
+		key: "fallright",
+		frames: this.anims.generateFrameNumbers("Eric", {start: 80, end: 86}),
+		framerate: 4,
+	});
+
+
+	this.anims.create({
+		key: "turnleft",
+		frames: this.anims.generateFrameNumbers("Eric", {start: 87, end: 90}),
+		framerate: 4,
+	});
+
+
+	this.anims.create({
+		key: "turnright",
+		frames: this.anims.generateFrameNumbers("Eric", {start: 91, end: 94}),
+		framerate: 4,
+	});
+
+
+	this.anims.create({
+		key: "walkleft",
+		frames: this.anims.generateFrameNumbers("Eric", {start: 96, end: 108}),
+		framerate: 12,
+		repeat: 0,
+	});
+
+	this.anims.create({
+		key: "walkright",
+		frames: this.anims.generateFrameNumbers("Eric", {start: 110, end: 122}),
+		framerate: 12,
+		repeat: 0,
+	});
+
+
+	/*Creacion de controles de teclado.*/
+	cursors = this.input.keyboard.createCursorKeys();
+
+
+	
+
+
+	/*Creacion del marcador.*/
+	scoreText = this.add.text(16, 16, "Score: 0", { fontSize: "24px", fill: "#000" });
+
+
+	/*Escalado de jugador.*/
+	player.setScale(2);
+	//player.refreshBody();
+
+
+	//this.camera.follow(player);
+
+}
+
+
+function collectScrew (player, screw){
+
+    screw.disableBody(true, true);
+
+    /*Puntuacion.*/
+    score += 25;
+    scoreText.setText("Score: " + score);
+}
+
+
+/*Actualiza la pantalla y el estado del videojuego*/
+function update(){
+
+	//console.log("update");
+
+	/*Funciones del teclado.*/
+	if (cursors.left.isDown) {
+		player.setVelocityX(-160);
+		player.anims.play("walkleft", true);
+	} else if (cursors.right.isDown) {
+		player.setVelocityX(160);
+		player.anims.play("walkright", true);
+	} else if (cursors.down.isDown){
+		player.setVelocityX(0);
+		//player.anims.play("crouchleft", true);
+	} else {
+		player.setVelocityX(0);
+		player.anims.play("idle1left", true);
+	}
+
+	if (cursors.up.isDown && player.body.touching.down){
+		player.setVelocityY(-360);
+	}
+
+}
+
+
+/*Actualiza la pantalla y el estado del videojuego. Similar a update.*/
+function render(){
+	//console.log("render");
+}
+
+
+
+// game.state.add("gameplay");
+// game.state.start("gameplay");

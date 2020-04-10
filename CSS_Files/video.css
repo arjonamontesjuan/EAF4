@@ -1,0 +1,50 @@
+/*Encabezamientos.*/
+h1{
+	/*Color.*/
+	color: green;
+}
+
+
+/*Video embebido.*/
+div.divvideo{
+
+	/*Tamaño.*/
+	/*width: 640px;*/
+	/*height: 480px;*/
+
+	/*Posicion.*/
+	text-align: center;
+	position: middle;
+	vertical-align: center;
+}
+
+
+#presentationvideo{
+
+	/*Tamaño.*/
+	width: 100%;
+	max-width: 1920px;
+	min-width: 720px;
+	height: auto;
+	max-height: auto;
+	min-height: auto;
+
+	/*Margenes*/
+	padding-left: 20px;
+
+	/*Posicion.*/
+	text-align: center;
+	position: middle;
+	vertical-align: center;
+}
+
+#infovideo{
+
+	/*Tamaño.*/
+	width: 100%;
+	max-width: 720px;
+	min-width: 640px;
+	height: auto;
+	max-height: auto;
+	min-height: auto;
+}

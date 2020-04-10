@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+    <head>
+
+        <meta charset="utf-8"/>
+        <meta name="description" content="Pagina que contiene el formulario." />
+
+        <!--Incluye el titulo de la pagina en el explorador.-->
+        <title> contact </title>
+
+        <!--Incluye la hoja de estilos.-->
+        <link rel="stylesheet" type="text/css" href="../CSS_Files/style.css">
+        <link rel="stylesheet" type="text/css" href="../CSS_Files/contact.css">
+
+        <!--Logo en el Tab.-->
+        <link rel="icon" type="image/png" href="../Image_Files/logoheader.png">
+
+        <!--Incluye el enlace a los scripts.-->
+        <!--<script type="text/javascript" src="//cdn.jsdelivr.net/npm/phaser@3.22.0/dist/phaser.js"></script>-->
+        <!--<script type="text/javascript" src="../Phaser/phaser.min.js"></script>-->
+        <!--<script type="text/javascript" src="../Phaser/phaser.js"></script>-->
+        <script type="text/javascript" src="../JS_Files/webcode.js"></script>
+        <!--<script type="text/javascript" src="../JS_Files/gamecode.js"></script>-->
+
+        <script src="http://code.jquery.com/jquery-latest.js"></script>
+
+    </head>
+
+
+    <body>
+
+		<!--Encabezamiento general.-->
+        <header class="mainheader">
+
+            <!--Encabezamiento izquierdo para el logotipo.-->
+            <div class="headerleft">
+
+                <!--Logotipo.-->
+                <div class="divlogo">
+                    <a id="logoheader" href="index.html">
+                        <img src="../Image_Files/logoheader.png" alt="Locobots">
+                    </a>     
+                </div>      
+
+            </div>
+            
+
+            <!--Encabezamiento derecho para el título.-->
+            <div class="headerright">
+
+                <!--Titulo.-->
+                <h1> Locobots </h1>
+
+                <!--Subtitulo.-->
+                <h2> ¡Colega, he perdido un tornillo! </h2>
+
+                <!--Barra de navegacion horizontal.-->
+                <nav class="navhorizontal">
+					<ul class="ulcategory">
+						<!--Categorias.-->
+						<li class="licategory"><a href="index.html"> Inicio </a></li>
+						<li class="licategory"><a href="video.html"> Video </a></li>
+		                <li class="licategory"><a href="videogame.html"> Videojuego </a></li>
+		                <li class="licategory"> Contacto </li>
+					</ul>
+                </nav>
+
+            </div>
+
+        </header>
+
+
+        <!--Divisor de la pagina.-->
+        <div class="splitter">
+
+            <!--Barra izquierda de navegación o menus.-->
+            <section class="splitleft">
+
+		        <!--Panel de seleccion de navegacion.-->
+		        <div class="divdroplistnavigate">
+			        <p class = "pnavigate">
+			            <select id = "droplistnavigate" size = "1" onchange="navigateOnChange()">
+			                <option value="index"> Inicio </option>
+			                <option value="video"> Video </option>
+			                <option value="videogame"> Videojuego </option>
+			                <option value="contact" selected="selected"> Contacto </option>
+			            </select>
+			        </p>
+		        </div>
+
+            </section> 
+
+
+            <!--Barra derecha de contenidos.-->
+            <section class="splitright">
+
+
+                <!--Texto de introduccion.-->
+                <p class ="presume">
+                    <b>Registro de usuario</b><br>
+                </p>
+                
+
+		        <form id="registerform" method="post" action="">
+
+		        	<div class="divformelement">
+						<fieldset class="fieldpersonaldata">
+
+							<!--Nombre y apellidos.-->
+							<legend class="formlegend">Datos personales</legend>
+
+							<div>
+				        		<label for="name"> Nombre: <span class="pmandatory">*</span> </label><br>
+				        		<input type="text" id="name" name="name" placeholder="Inserte nombre" required><br>
+				        	</div>
+
+				        	<div>
+								<label for="name1"> Primer apellido: <span class="pmandatory">*</span> </label><br>
+				        		<input type="text" id="name1" name="name1" placeholder="Inserte Apellido1" required><br>
+				        	</div>
+
+				        	<div>
+								<label for="name2"> Segundo apellido: <span class="pmandatory">*</span> </label><br>
+				        		<input type="text" id="name2" name="name2" placeholder="Inserte Apellido2" required><br><br>
+							</div>
+
+							<!--Fecha de nacimiento.-->
+							<div>
+			        			<label for="birthdate" value=""> Fecha de nacimiento: </label><br>
+			        			<input type="date" id="birthdate"><br><br>
+							</div>
+
+			        		<!--Sexo.-->
+			        		<label for="gender"> Sexo: </label><br>
+				        	<div>
+				        		<input type="radio" id="man" name="gender" value="man">
+								<label for="man"> Hombre </label>
+							</div>
+							<div>
+				        		<input type="radio" id="woman" name="gender" value="woman">
+								<label for="woman"> Mujer </label>
+							</div>
+
+						</fieldset>
+					</div>
+
+					<div class="divformelement">
+						<fieldset class="fieldaddress">
+
+							<!--Direccion.-->
+							<legend class="formlegend">Dirección</legend>
+
+				        	<label for="way"> Tipo de via: <span class="pmandatory">*</span> </label><br>
+							<select id="way" name="way" size = "1" required>
+				        		<option value="" selected="selected">-- Seleccione tipo de via --</option>
+				        		<option value="1"> Avenida </option>
+				        		<option value="2"> Calle </option>
+				        		<option value="3"> Pasaje </option>
+				        		<option value="4"> Paseo </option>
+				        	</select><br>
+
+				        	<label for="address" value=""> Dirección: <span class="pmandatory">*</span></label><br>
+				        	<input type="text" id="textaddress" name="address" placeholder="Indique dirección" required><br>
+
+				        	<label for="addressnumber" value=""> Número: <span class="pmandatory">*</span></label><br>
+				        	<input type="text" id="textaddressnumber" placeholder="#" required><br>
+
+				        	<ul id="uladdress">
+					        	<li class="liaddress"><label for="block" value=""> Bloque: </label><br>
+					        	<input type="text" id="textaddressblock" name="block"></li>
+
+					        	<li class="liaddress"><label for="scale" value=""> Esc: </label><br>
+					        	<input type="text" id="textaddressscale" name="scale"></li>
+
+					        	<li class="liaddress"><label for="floor" value=""> Piso: </label><br>
+					        	<input type="text" id="textaddressfloor" name="floor"></li>
+
+					        	<li class="liaddress"><label for="door"> Puerta: </label><br>
+					        	<input type="text" id="textaddressdoor" name="door"></li>
+				        	</ul><br>
+
+				        	<label for="postalcode"> Código postal: <span class="pmandatory">*</span> </label><br>
+				        	<input type="text" id="textpostalcode" name="postalcode" placeholder="12345" required><br>
+
+							<label for="city"> Ciudad: <span class="pmandatory">*</span> </label><br>
+				        	<select id="city" name="city" size = "1" required>
+				        		<option value="" selected="selected"> -- Seleccione ciudad -- </option>
+				        		<option value="1"> Adra </option>
+				        		<option value="2"> Aguadulce </option>
+				        		<option value="3"> Albacete </option>
+				        		<option value="4"> Alba de Tormes </option>
+				        		<option value="5"> Alberca </option>
+				        		<option value="6"> Albir </option>
+				        		<option value="7"> Albufeira </option>
+				        		<option value="8"> Alcala de Henares </option>
+				        		<option value="9"> Alhama </option>
+				        		<option value="10"> Alicante </option>
+				        		<option value="11"> Allora </option>
+				        		<option value="12"> Almeria </option>
+				        		<option value="13"> Almerimar </option>
+				        		<option value="14"> Almodovar </option>
+				        		<option value="15"> Almuñecar </option>
+				        		<option value="16"> Alpujarra </option>
+				        		<option value="17"> Altamira </option>
+				        		<option value="18"> Altea </option>
+				        		<option value="19"> Antequera </option>
+				        		<option value="20"> Antilla </option>
+				        		<option value="21"> Aranjuez </option>
+				        		<option value="22"> Arenys de Mar </option>
+				        		<option value="23"> Avila </option>
+				        		<option value="24"> Aviles </option>
+
+				        		<option value="25"> Badalona </option>
+				        		<option value="26"> Baelo claudia </option>
+				        		<option value="27"> Baena </option>
+				        		<option value="28"> Barcelona </option>
+				        		<option value="29"> Barciense </option>
+				        		<option value="30"> Batuecas </option>
+
+				        		<option value="31"> Etc. </option>
+
+				        	</select><br>
+
+						</fieldset>
+					</div>
+
+					<div class="divformelement">
+						<fieldset class="fieldemailpassword">
+
+							<!--Email y contraseña.-->
+							<legend class="formlegend">Email y contraseña</legend>
+
+				        	<label for="email"> Email: <span class="pmandatory">*</span></label>
+				        	<input type="email" id="emailbox" placeholder="example@email.com" required><br><br>
+
+				        	<label for="password"> Contraseña: <span class="pmandatory">*</span></label>
+				        	<input type="password" id="passwordbox" required><br><br>
+
+				        	<label for="passwordrepeat"> Repita contraseña: <span class="pmandatory">*</span></label>
+				        	<input type="password" id="passwordrepeatbox" required><br><br>
+
+						</fieldset>
+					</div>
+
+
+
+					<!--Aceptacion de condiciones.-->
+					<div class="divformbottom">
+						<p class="pconditions">
+				        	<input type="checkbox" id="acceptconditions" name="accept" value="aceptconditions" required=true>
+				  			<label for="accept"> Acepto las condiciones de uso. <span class="pmandatory">*</span></label><br><br>
+				  		</p>
+
+				  		<!--Boton para confirmar y borrar el formulario.-->
+				  		<input type="submit" id="submitbutton" onclick="return checkForm()" value="Enviar">
+				  		<input type="reset" id="resetbutton" onclick="return resetForm()" value="Borrar">
+
+				  		<!--Texto de introduccion.-->
+		                <p class ="pmandatory">
+		                    Los campos con el símbolo * son obligatorios.
+		                </p>
+	                </div>
+
+
+				</form>
+
+
+            </section>
+
+        </div>
+
+
+        <!--Pie de pagina-->
+        <footer class="mainfooter">
+            <ul class="ulfooter">
+                <li class="lifooter">Juan Arjona Montes &copy; 2020</li>
+                <li class="lifooter">-</li>
+                <li class="lifooter">M06 Realización de proyectos multimedia interactivos</li>
+                <li class="lifooter">-</li>
+                <li class="lifooter">EAF4 Preentrega</li><br>
+                <li class="lifooter"><a href="mailto:arjonamontesjuan@hotmail.com">arjonamontesjuan@hotmail.com</a></li>
+                <li class="lifooter">-</li>
+                <li class="lifooter">Términos y condiciones</li>
+            </ul>
+        </footer>
+
+
+    </body>
+
+</html>

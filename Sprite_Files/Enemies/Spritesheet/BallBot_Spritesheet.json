@@ -1,0 +1,356 @@
+{
+	"textures": [
+		{
+			"image": "BallBot_Spritesheet.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 152,
+				"h": 152
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "1/ballred1.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 33,
+						"h": 38
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 33,
+						"h": 38
+					},
+					"frame": {
+						"x": 0,
+						"y": 0,
+						"w": 33,
+						"h": 38
+					}
+				},
+				{
+					"filename": "1/ballred2.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 33,
+						"h": 38
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 33,
+						"h": 38
+					},
+					"frame": {
+						"x": 33,
+						"y": 0,
+						"w": 33,
+						"h": 38
+					}
+				},
+				{
+					"filename": "1/ballred3.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 33,
+						"h": 38
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 33,
+						"h": 38
+					},
+					"frame": {
+						"x": 66,
+						"y": 0,
+						"w": 33,
+						"h": 38
+					}
+				},
+				{
+					"filename": "1/ballred4.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 33,
+						"h": 38
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 33,
+						"h": 38
+					},
+					"frame": {
+						"x": 99,
+						"y": 0,
+						"w": 33,
+						"h": 38
+					}
+				},
+				{
+					"filename": "2/ballpurple1.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 32,
+						"h": 38
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 32,
+						"h": 38
+					},
+					"frame": {
+						"x": 0,
+						"y": 38,
+						"w": 32,
+						"h": 38
+					}
+				},
+				{
+					"filename": "2/ballpurple2.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 32,
+						"h": 38
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 32,
+						"h": 38
+					},
+					"frame": {
+						"x": 32,
+						"y": 38,
+						"w": 32,
+						"h": 38
+					}
+				},
+				{
+					"filename": "2/ballpurple3.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 32,
+						"h": 38
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 32,
+						"h": 38
+					},
+					"frame": {
+						"x": 64,
+						"y": 38,
+						"w": 32,
+						"h": 38
+					}
+				},
+				{
+					"filename": "2/ballpurple4.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 32,
+						"h": 38
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 32,
+						"h": 38
+					},
+					"frame": {
+						"x": 96,
+						"y": 38,
+						"w": 32,
+						"h": 38
+					}
+				},
+				{
+					"filename": "3/ballorange1.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 32,
+						"h": 38
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 32,
+						"h": 38
+					},
+					"frame": {
+						"x": 0,
+						"y": 76,
+						"w": 32,
+						"h": 38
+					}
+				},
+				{
+					"filename": "3/ballorange2.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 32,
+						"h": 38
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 32,
+						"h": 38
+					},
+					"frame": {
+						"x": 32,
+						"y": 76,
+						"w": 32,
+						"h": 38
+					}
+				},
+				{
+					"filename": "3/ballorange3.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 32,
+						"h": 38
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 32,
+						"h": 38
+					},
+					"frame": {
+						"x": 64,
+						"y": 76,
+						"w": 32,
+						"h": 38
+					}
+				},
+				{
+					"filename": "3/ballorange4.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 32,
+						"h": 38
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 32,
+						"h": 38
+					},
+					"frame": {
+						"x": 96,
+						"y": 76,
+						"w": 32,
+						"h": 38
+					}
+				},
+				{
+					"filename": "4/ballgreen1.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 32,
+						"h": 38
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 32,
+						"h": 38
+					},
+					"frame": {
+						"x": 0,
+						"y": 114,
+						"w": 32,
+						"h": 38
+					}
+				},
+				{
+					"filename": "4/ballgreen2.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 32,
+						"h": 38
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 32,
+						"h": 38
+					},
+					"frame": {
+						"x": 32,
+						"y": 114,
+						"w": 32,
+						"h": 38
+					}
+				},
+				{
+					"filename": "4/ballgreen3.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 32,
+						"h": 38
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 32,
+						"h": 38
+					},
+					"frame": {
+						"x": 64,
+						"y": 114,
+						"w": 32,
+						"h": 38
+					}
+				},
+				{
+					"filename": "4/ballgreen4.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 32,
+						"h": 38
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 32,
+						"h": 38
+					},
+					"frame": {
+						"x": 96,
+						"y": 114,
+						"w": 32,
+						"h": 38
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:91e557cc9ec0dc84c23619131493d274:1ed3be0b3b5e84907a85690c55967920:fc61ab5363e6faac290786b567d372fc$"
+	}
+}

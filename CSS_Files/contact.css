@@ -1,0 +1,350 @@
+/*Encabezamientos.*/
+h1{
+	/*Color.*/
+	color: blue;
+}
+
+
+/*Formulario*/
+form{
+
+	/*Tamaño.*/
+	width: 100%;
+	height: auto;
+}
+
+
+legend.formlegend{
+
+	/*Margenes.*/
+	margin: 0px;
+	padding-left: 0px;
+
+	/*Posicion.*/
+	position: left;
+
+	/*Tipo.*/
+	font-style: bold;
+	/*display: block;*/
+}
+
+
+label{
+
+	/*Margenes.*/
+	margin: 0px;
+}
+
+
+#registerform{
+
+	/*Tamaño*/
+	width: 100%;
+	min-width: 75%;
+
+	/*Posicion.*/
+	overflow: hidden;
+	justify-content: space-between | space-around;
+
+}
+
+
+form fieldset.fieldpersonaldata{
+
+	/*Tamaño.*/
+	width: 200px;
+	height: 300px;
+
+	/*Margenes*/
+	margin-left: 20px;
+	padding-left: 10px;
+
+	/*Posicion.*/
+	float: left;
+
+	/*Tipo.*/
+	font-family: verdana;
+}
+
+
+#name, #name1, #name2{
+
+	/*Tamaño.*/
+	width: 200px;
+	height: 18px;
+
+	/*Tipo.*/
+	font-family: verdana; 
+	/*font-style: italic;*/
+
+	/*Color.*/
+	color: black;
+}
+
+#birthdate{
+
+	/*Tamaño.*/
+	width: auto;
+	height: 18px;
+
+	/*Tipo.*/
+	font-family: verdana; 
+	/*font-style: italic;*/
+
+	/*Color.*/
+	color: black;
+}
+
+
+form fieldset.fieldaddress{
+
+	/*Tamaño.*/
+	width: 250px;
+	height: 300px;
+
+	/*Margenes*/
+	margin-left: 10px;
+	padding-left: 10px;
+
+	/*Posicion.*/
+	float: left;
+
+	/*Tipo.*/
+	font-family: verdana;
+}
+
+
+#way, #city{
+
+	/*Tamaño.*/
+	width: auto;
+	height: 25px;
+
+	/*Posicion.*/
+	text-align: left;
+
+	/*Tipo.*/
+	font-family: verdana; 
+	/*font-style: italic;*/
+}
+
+#textaddress{
+
+	/*Tamaño.*/
+	width: 200px;
+	height: 18px;
+
+	/*Tipo.*/
+	font-family: verdana; 
+	/*font-style: italic;*/
+
+	/*Color.*/
+	color: black;
+}
+
+#textaddressnumber, #textaddressblock, #textaddressscale, #textaddressfloor, #textaddressdoor{
+
+	/*Tamaño.*/
+	width: 40px;
+
+	/*Tipo.*/
+	font-family: verdana; 
+	/*font-style: italic;*/
+
+	/*Color.*/
+	color: black;
+}
+
+#textpostalcode{
+
+	/*Tamaño.*/
+	width: 100px;
+
+	/*Tipo.*/
+	font-family: verdana; 
+	/*font-style: italic;*/
+
+	/*Color.*/
+	color: black;
+}
+
+#uladdress{
+
+	/*Tamaño.*/
+	width: auto;
+
+	/*Margenes.*/
+  	margin: 0;
+  	padding: 0;
+
+  	/*Posicion.*/
+	text-align: left;
+	text-indent: 0px;
+
+	/*Tipo.*/
+  	list-style-type: none;
+  	overflow: hidden;
+}
+
+
+li.liaddress{
+
+	/*Tamaño.*/
+	width: auto;
+
+	/*Margenes.*/
+	padding-left: 0px;
+
+	/*Tipo.*/
+	display: inline-block;
+
+	/*Texto.*/
+	text-decoration: none;
+}
+
+
+
+form fieldset.fieldemailpassword{
+
+	/*Tamaño.*/
+	width: 375px;
+	height: auto;
+
+	/*Margenes*/
+	margin-left: 10px;
+	padding-left: 10px;
+
+	/*Posicion.*/
+	/*justify-content: top;*/
+	position: relative;
+	float: right;
+
+	/*Tipo.*/
+	font-family: verdana;
+}
+
+
+#emailbox, #passwordbox, #passwordrepeatbox{
+
+	/*Tamaño.*/
+	width: 200px;
+	height: 18px;
+
+	/*Margenes*/
+	margin-left: 0px;
+	padding-left: 0px;
+
+	/*Posicion.*/
+	float: right;
+	vertical-align: top;
+
+	/*Tipo.*/
+	font-family: verdana; 
+	/*font-style: italic;*/
+
+	/*Color.*/
+	color: black;
+}
+
+
+div.divformelement{
+
+	/*Posicion.*/
+	display: inline-block;
+
+}
+
+div.divformbottom{
+
+	display: block;
+
+	/*Margenes*/
+	margin: 0px;
+	padding-left: 20px;
+	/*border-color: blue;*/
+	/*border-radius: 5px;*/
+
+	/*Posicion.*/
+	position: right;
+	/*align-items: right;*/
+	/*float: bottom;*/
+
+	/*Color.*/
+	color: black;
+}
+
+
+#submitbutton{
+
+	/*Posicion.*/
+	float: center;
+}
+
+#resetbutton{
+
+	/*Posicion.*/
+	float: center;
+}
+
+
+p.pconditions{
+
+	/*Tamaño.*/
+	font-size: 1em;
+
+	/*Tipo.*/
+	font-family: verdana;
+	font-style: bold; 
+
+	/*Color.*/
+	color: black;
+}
+
+
+.pmandatory{
+
+	/*Tamaño.*/
+	font-size: 80%;
+
+	/*Tipo.*/
+	font-family: verdana;
+	/*font-style: italic;*/
+
+	/*Color.*/
+	color: red;
+}
+
+
+@-webkit-keyframes shake {
+	
+	/*Cambiar campos del formulario.*/
+    0% { -webkit-transform: translate(2px, 1px) rotate(0deg); background: red;} 
+    10% { -webkit-transform: translate(-1px, -2px) rotate(-1deg); background: red;}
+    20% { -webkit-transform: translate(-3px, 0px) rotate(1deg); background: red;}
+    30% { -webkit-transform: translate(0px, 2px) rotate(0deg); background: red;}
+    40% { -webkit-transform: translate(1px, -1px) rotate(1deg); background: red;}
+    50% { -webkit-transform: translate(-1px, 2px) rotate(-1deg); background: red;}
+    60% { -webkit-transform: translate(-3px, 1px) rotate(0deg); background: red;}
+    70% { -webkit-transform: translate(2px, 1px) rotate(-1deg); background: red;}
+    80% { -webkit-transform: translate(-1px, -1px) rotate(1deg); background: red;}
+    90% { -webkit-transform: translate(2px, 2px) rotate(0deg); background: red;}
+    100% { -webkit-transform: translate(1px, -2px) rotate(-1deg); background: red;}
+}
+
+.invalidfield{
+	
+	/*Cambiar campos del formulario.*/
+	-webkit-animation-name: shake;
+	-webkit-animation-duration: 0.5s;
+    -webkit-transform-origin:50% 50%;
+    -webkit-animation-iteration-count: 2s;
+
+    /*Color.*/
+    border-color: red;
+}
+
+.invalidfield:focus{
+
+	/*Color.*/
+	border-color: none;
+}

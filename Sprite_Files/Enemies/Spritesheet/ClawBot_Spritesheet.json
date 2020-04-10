@@ -1,0 +1,356 @@
+{
+	"textures": [
+		{
+			"image": "ClawBot_Spritesheet.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 688,
+				"h": 28
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "1/botzred1.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 41,
+						"h": 26
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 41,
+						"h": 26
+					},
+					"frame": {
+						"x": 1,
+						"y": 1,
+						"w": 41,
+						"h": 26
+					}
+				},
+				{
+					"filename": "1/botzred2.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 41,
+						"h": 26
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 41,
+						"h": 26
+					},
+					"frame": {
+						"x": 44,
+						"y": 1,
+						"w": 41,
+						"h": 26
+					}
+				},
+				{
+					"filename": "1/botzred3.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 41,
+						"h": 26
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 41,
+						"h": 26
+					},
+					"frame": {
+						"x": 87,
+						"y": 1,
+						"w": 41,
+						"h": 26
+					}
+				},
+				{
+					"filename": "1/botzred4.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 41,
+						"h": 26
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 41,
+						"h": 26
+					},
+					"frame": {
+						"x": 130,
+						"y": 1,
+						"w": 41,
+						"h": 26
+					}
+				},
+				{
+					"filename": "2/botzpurple1.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 41,
+						"h": 26
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 41,
+						"h": 26
+					},
+					"frame": {
+						"x": 173,
+						"y": 1,
+						"w": 41,
+						"h": 26
+					}
+				},
+				{
+					"filename": "2/botzpurple2.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 41,
+						"h": 26
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 41,
+						"h": 26
+					},
+					"frame": {
+						"x": 216,
+						"y": 1,
+						"w": 41,
+						"h": 26
+					}
+				},
+				{
+					"filename": "2/botzpurple3.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 41,
+						"h": 26
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 41,
+						"h": 26
+					},
+					"frame": {
+						"x": 259,
+						"y": 1,
+						"w": 41,
+						"h": 26
+					}
+				},
+				{
+					"filename": "2/botzpurple4.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 41,
+						"h": 26
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 41,
+						"h": 26
+					},
+					"frame": {
+						"x": 302,
+						"y": 1,
+						"w": 41,
+						"h": 26
+					}
+				},
+				{
+					"filename": "3/botzorange1.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 41,
+						"h": 26
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 41,
+						"h": 26
+					},
+					"frame": {
+						"x": 345,
+						"y": 1,
+						"w": 41,
+						"h": 26
+					}
+				},
+				{
+					"filename": "3/botzorange2.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 41,
+						"h": 26
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 41,
+						"h": 26
+					},
+					"frame": {
+						"x": 388,
+						"y": 1,
+						"w": 41,
+						"h": 26
+					}
+				},
+				{
+					"filename": "3/botzorange3.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 41,
+						"h": 26
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 41,
+						"h": 26
+					},
+					"frame": {
+						"x": 431,
+						"y": 1,
+						"w": 41,
+						"h": 26
+					}
+				},
+				{
+					"filename": "3/botzorange4.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 41,
+						"h": 26
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 41,
+						"h": 26
+					},
+					"frame": {
+						"x": 474,
+						"y": 1,
+						"w": 41,
+						"h": 26
+					}
+				},
+				{
+					"filename": "4/botzgreen1.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 41,
+						"h": 26
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 41,
+						"h": 26
+					},
+					"frame": {
+						"x": 517,
+						"y": 1,
+						"w": 41,
+						"h": 26
+					}
+				},
+				{
+					"filename": "4/botzgreen2.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 41,
+						"h": 26
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 41,
+						"h": 26
+					},
+					"frame": {
+						"x": 560,
+						"y": 1,
+						"w": 41,
+						"h": 26
+					}
+				},
+				{
+					"filename": "4/botzgreen3.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 41,
+						"h": 26
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 41,
+						"h": 26
+					},
+					"frame": {
+						"x": 603,
+						"y": 1,
+						"w": 41,
+						"h": 26
+					}
+				},
+				{
+					"filename": "4/botzgreen4.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 41,
+						"h": 26
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 41,
+						"h": 26
+					},
+					"frame": {
+						"x": 646,
+						"y": 1,
+						"w": 41,
+						"h": 26
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:2e94ab003776fd37500483bdb62b9c1f:bf3d123ba56f2cc9b2d09ee66dff4d7e:c7fba01378b244e801bdcc20093cfde2$"
+	}
+}

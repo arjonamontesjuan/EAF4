@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+    <head>
+
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+        <!--Incluye el titulo de la pagina en el explorador.-->
+        <title> index </title>
+
+        <!--Incluye la hoja de estilos.-->
+        <link rel="stylesheet" type="text/css" href="../CSS_Files/style.css">
+
+        <!--Logo en el Tab.-->
+        <link rel="icon" type="image/png" href="../Image_Files/logoheader.png">
+
+        <!--Incluye el enlace a los scripts.-->
+        <!--<script type="text/javascript" src="//cdn.jsdelivr.net/npm/phaser@3.22.0/dist/phaser.js"></script>-->
+        <!--<script type="text/javascript" src="../Phaser/phaser.min.js"></script>-->
+        <!--<script type="text/javascript" src="../Phaser/phaser.js"></script>-->
+        <script type="text/javascript" src="../JS_Files/webcode.js"></script>
+        <!--<script type="text/javascript" src="../JS_Files/gamecode.js"></script>-->
+
+        <script src="http://code.jquery.com/jquery-latest.js"></script>
+
+    </head>
+
+
+    <body>
+
+        <!--Encabezamiento general.-->
+        <header class="mainheader">
+
+            <!--Encabezamiento izquierdo para el logotipo.-->
+            <div class="headerleft">
+
+                <!--Logotipo.-->
+                <div class="divlogo">
+                    <a id="logoheader" href="index.html">
+                        <img src="../Image_Files/logoheader.png" alt="Locobots">
+                    </a>     
+                </div>      
+
+            </div>
+            
+
+            <!--Encabezamiento derecho para el título.-->
+            <div class="headerright">
+
+                <!--Titulo.-->
+                <h1> Locobots </h1>
+
+                <!--Subtitulo.-->
+                <h2> ¡Colega, he perdido un tornillo! </h2>
+
+                <!--Barra de navegacion horizontal.-->
+                <nav class="navhorizontal">
+                    <ul class="ulcategory">
+                        <!--Categorias.-->
+                        <li class="licategory"> Inicio </li>
+                        <li class="licategory"><a href="video.html"> Video </a></li>
+                        <li class="licategory"><a href="videogame.html"> Videojuego </a></li>
+                        <li class="licategory"><a href="contact.html"> Contacto </a></li>
+                    </ul>
+                </nav>
+
+            </div>
+
+
+        </header>
+
+
+        <!--Divisor de la pagina.-->
+        <div class="splitter">
+
+            <!--Barra izquierda de navegación o menus.-->
+            <section class="splitleft">
+
+                <!--Panel de seleccion de navegacion.-->
+                <div class="divdroplistnavigate">
+                    <p class = "pnavigate">
+                        <select id="droplistnavigate" size = "1" onchange="navigateOnChange()">
+                            <option value="index" selected="selected"> Inicio </option>
+                            <option value="video"> Video </option>
+                            <option value="videogame"> Videojuego </option>
+                            <option value="contact"> Contacto </option>
+                        </select>
+                    </p>
+                </div>
+
+            </section> 
+
+
+            <!--Barra derecha de contenidos.-->
+            <section class="splitright">
+
+                <!--Texto de introduccion.-->
+                <p class = "pintro">
+                    Después de una larga noche de fiesta en la antigua fábrica, Eric y Bimo despiertan desorientados, con resaca... ¡y algunas piezas de menos!<br>
+                    ¡Ayúdales a encontrar todas las piezas que han perdido!
+                </p>
+                <br>
+
+                <p class ="presume">
+                    <b>Sinopsis</b><br><br>
+
+                    Las unidades Eric y Bimo acaban de reiniciarse después de una noche desenfrenada en la fábrica.<br>
+                    Los circuitos fallan: el aceite que tomaron era de baja calidad.<br><br>
+
+                    Locobots es un videojuego de plataformas en 2D ambientado en un futuro distópico donde los robots viven en un mundo alocado y se divierten.<br>
+                    Se dispone de dos personajes distintos para jugar la aventura: Eric y Bimo. El jugador debe utilizar el teclado para dirigir a al personaje seleccionado y recuperar las piezas que han perdido la noche anterior por los diferentes escenarios de la antigua fábrica.<br>
+                    ¡Tuercas, engranajes, tornillos y muelles! Cada elemento recogido sube puntos al marcador. Una vez recogidos todos, Eric y Bimo podrán pasar al siguiente nivel si los consiguen recoger a tiempo.<br><br>
+
+                    Durante la aventura, varios de tus amigos robóticos te echarán una mano.<br><br>
+
+                    Pero ¡ten cuidado con tus circuitos! Los robots vigilantes de la fábrica están por todas partes y necesitas tu rayo láser para detenerlos.<br><br>
+
+                    Pulsa Enter para continuar con esta aventura.
+
+                </p>
+                <br>
+
+
+                <!--Imagenes iniciales de presentacion.-->
+                <div class="divimageintro">
+                    <p id="pimageintro">
+                        <img src="../Image_Files/Eric_Bimo.png" alt="Eric y Bimo" />
+                    </p>
+                </div>
+
+            </section>
+
+        </div>
+
+
+        <!--Pie de pagina-->
+        <footer class="mainfooter">
+            <ul class="ulfooter">
+                <li class="lifooter">Juan Arjona Montes &copy; 2020</li>
+                <li class="lifooter">-</li>
+                <li class="lifooter">M06 Realización de proyectos multimedia interactivos</li>
+                <li class="lifooter">-</li>
+                <li class="lifooter">EAF4 Preentrega</li><br>
+                <li class="lifooter"><a href="mailto:arjonamontesjuan@hotmail.com">arjonamontesjuan@hotmail.com</a></li>
+                <li class="lifooter">-</li>
+                <li class="lifooter">Términos y condiciones</li>
+            </ul>
+        </footer>
+
+
+    </body>
+
+</html>

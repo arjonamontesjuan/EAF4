@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+    <head>
+
+        <meta charset="utf-8"/>
+        <meta name="description" content="Pagina que contiene los videos." />
+
+        <!--Incluye el titulo de la pagina en el explorador.-->
+        <title> videogame </title>
+
+        <!--Incluye la hoja de estilos.-->
+        <link rel="stylesheet" type="text/css" href="../CSS_Files/style.css">
+        <link rel="stylesheet" type="text/css" href="../CSS_Files/video.css">
+
+        <!--Logo en el Tab.-->
+        <link rel="icon" type="image/png" href="../Image_Files/logoheader.png">
+
+        <!--Incluye el enlace a los scripts.-->
+        <!--<script type="text/javascript" src="//cdn.jsdelivr.net/npm/phaser@3.22.0/dist/phaser.js"></script>-->
+        <!--<script type="text/javascript" src="../Phaser/phaser.min.js"></script>-->
+        <!--<script type="text/javascript" src="../Phaser/phaser.js"></script>-->
+        <script type="text/javascript" src="../JS_Files/webcode.js"></script>
+        <!--<script type="text/javascript" src="../JS_Files/gamecode.js"></script>-->
+
+        <script src="http://code.jquery.com/jquery-latest.js"></script>
+
+    </head>
+
+
+    <body>
+
+        <!--Encabezamiento general.-->
+        <header class="mainheader">
+
+            <!--Encabezamiento izquierdo para el logotipo.-->
+            <div class="headerleft">
+
+                <!--Logotipo.-->
+                <div class="divlogo">
+                    <a id="logoheader" href="index.html">
+                        <img src="../Image_Files/logoheader.png" alt="Locobots">
+                    </a>     
+                </div>      
+
+            </div>
+            
+
+            <!--Encabezamiento derecho para el título.-->
+            <div class="headerright">
+
+                <!--Titulo.-->
+                <h1> Locobots </h1>
+
+                <!--Subtitulo.-->
+                <h2> ¡Colega, he perdido un tornillo! </h2>
+
+                <!--Barra de navegacion horizontal.-->
+                <nav class="navhorizontal">
+                    <ul class="ulcategory">
+                        <!--Categorias.-->
+                        <li class="licategory"><a href="index.html"> Index </a></li>
+                        <li class="licategory"> Video </li>
+                        <li class="licategory"><a href="videogame.html"> Videojuego </a></li>
+                        <li class="licategory"><a href="contact.html"> Contacto </a></li>
+                    </ul>
+                </nav>
+
+            </div>
+
+        </header>
+        
+
+                <!--Divisor de la pagina.-->
+        <div class="splitter">
+
+            <!--Barra izquierda de navegación o menus.-->
+            <section class="splitleft">
+
+                <!--Panel de seleccion de navegacion.-->
+                <div class="divdroplistnavigate">
+                    <p class = "pnavigate">
+                        <select id = "droplistnavigate" size = "1" onchange="navigateOnChange()">
+                            <option value="index"> Inicio </option>
+                            <option value="video" selected="selected"> Video </option>
+                            <option value="videogame"> Videojuego </option>
+                            <option value="contact"> Contacto </option>
+                        </select>
+                    </p>
+                </div>
+
+            </section> 
+
+
+            <!--Barra derecha de contenidos.-->
+            <section class="splitright">
+
+
+                <div>
+                    <p class ="presume">
+                        <b>Descripción del video</b><br><br>
+
+                        En el video que se muestra a continuación, destacan los personajes originales de esta historia: Eric y Bimo, dos robots despistados y desorientados.<br>
+                        Se analiza la motivación de los personajes y la ambientación del videojuego así como el objetivo del jugador: recuperar las piezas de nuestros protagonistas.<br>
+                        Se describe a su vez la mecánica del juego con un control por teclado y los movimientos básicos de los personajes: caminar, agacharse, saltar y disparar.<br>
+                        También se repasa la interfaz del juego, junto con su sistema de puntuación y las vidas disponibles.<br>
+                        Se muestran ejemplos de los assets y de los posibles enemigos que nos encontraremos a lo largo del juego.<br>
+
+                    </p>
+                </div>
+
+
+                <!--Video embebido de presentacion del videojuego.-->
+                <div class="divvideo">
+                    <video id="presentationvideo" preload="auto" controls="controls" type="video/mp4">
+                        <source src="../Multimedia_Files/ISE0M06_EAF4_1p_Arjona_M_Low.mp4">
+                    </video>
+                </div><br>
+
+
+                <div>
+                    <p class ="presume">
+                        <b>Video de presentación</b><br><br>
+
+                        El video que sigue representa el video del portafolio del autor, incluido en la EAF2.<br>
+                        En él se incluyen los principales trabajos realizados hasta el momento.<br>
+                        Si desea contactar conmigo, por favor, puede contactarme a la siguiente <i><a href="mailto:arjonamontesjuan@hotmail.com">dirección de correo electrónico</a></i>.<br>
+                    </p>
+                </div>
+
+
+                <!--Video embebido de presentacion del autor.-->
+                <div class="divvideo">
+                    <video id="infovideo" preload="auto" controls="controls" type="video/mp4">
+                        <source src="../Multimedia_Files/ISE0M06_EAF2_Arjona_M_Video.mp4">
+                    </video>
+                </div>
+
+            </section>
+
+        </div>
+
+
+        <!--Pie de pagina-->
+        <footer class="mainfooter">
+            <ul class="ulfooter">
+                <li class="lifooter">Juan Arjona Montes &copy; 2020</li>
+                <li class="lifooter">-</li>
+                <li class="lifooter">M06 Realización de proyectos multimedia interactivos</li>
+                <li class="lifooter">-</li>
+                <li class="lifooter">EAF4 Preentrega</li><br>
+                <li class="lifooter"><a href="mailto:arjonamontesjuan@hotmail.com">arjonamontesjuan@hotmail.com</a></li>
+                <li class="lifooter">-</li>
+                <li class="lifooter">Términos y condiciones</li>
+            </ul>
+        </footer>
+
+    </body>
+
+</html>

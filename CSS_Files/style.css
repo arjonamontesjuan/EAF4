@@ -1,0 +1,374 @@
+/*Encabezamiento general*/
+header.mainheader{
+
+	/*Tamaño.*/
+	width: 100%;
+	min-width: 480px;
+	height: 250px;
+	min-height: 250px;
+
+	/*Margenes.*/
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	margin-left: 0px;
+
+	padding-top: 0px;
+	padding-left: 0px;
+	padding-right: 0px;
+	padding-bottom: 0px;
+
+	/*Posicion.*/
+	position: fixed;
+	z-index: 100;
+
+	/*Visibilidad.*/
+	display: flex;
+
+	/*Color.*/
+	background: #000000;
+}
+
+
+/*Encabezamiento general izquierdo.*/
+div.headerleft{
+
+	/*Tamaño.*/
+	width: 200px;
+	min-width: 200px;
+	height: auto;
+	min-height: 200px;
+
+	/*Margenes.*/
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	margin-left: 0px;
+
+	padding-top: 0px;
+	padding-left: 0px;
+	padding-right: 0px;
+	padding-bottom: 0px;
+
+	/*Alineacion.*/
+	text-align: center;
+	vertical-align: center;
+}
+
+
+/*Encabezamiento general derecho.*/
+div.headerright{
+
+	/*Tamaño.*/
+	width: 100%;
+	height: auto;
+
+	/*Alineacion.*/
+	text-align: center;
+	vertical-align: center;
+}
+
+
+/*Logo*/
+div.divlogo img{
+
+	/*Tamaño.*/
+	width: 100%;
+	max-width: 128px;
+	height: auto;
+	max-height: 128px;
+
+	/*Margenes.*/
+	padding: 5px;
+
+	/*Posicion.*/
+	position: center;
+
+	/*Alineacion.*/
+	vertical-align: center;
+}
+
+
+/*Encabezamientos.*/
+h1{
+	/*Tamaño.*/
+	font-size: 3em;
+	
+	/*Posicion.*/
+	text-align: center;
+
+	/*Tipo.*/
+	font-family: Verdana;
+
+	/*Color.*/
+	color: red;
+}
+
+h2{
+	/*Tamaño.*/
+	font-size: 2em;
+
+	/*Posicion.*/
+	text-align: center;
+
+	/*Tipo.*/
+	font-family: Verdana;
+
+	/*Color.*/
+	color: white;
+}
+
+
+/*Listas de menu de navegacion horizontal.*/
+ul.ulcategory{
+
+	/*Tamaño.*/
+	width: auto;
+
+	/*Margenes.*/
+  	margin: 0;
+  	padding: 0;
+
+  	/*Posicion.*/
+	text-align: center;
+	text-indent: 0px;
+
+	/*Tipo.*/
+  	list-style-type: none;
+  	overflow: hidden;
+
+  	border: 1px solid #000000;
+  	border-radius: 6px;
+}
+
+
+li.licategory{
+
+	/*Tamaño.*/
+	width: auto;
+
+	/*Margenes.*/
+	padding: 8px;
+
+	/*Posicion.*/
+	float: center;
+
+	/*Tipo.*/
+	display: inline-block;
+	font-family: verdana;
+	font-weight: bold;
+
+	/*Texto.*/
+	text-decoration: none;
+
+	/*Color.*/
+	background-color: #dddddd;
+}
+
+
+div.splitter {
+
+	/*Tamaño.*/
+	width: auto;
+  	height: auto;
+
+  	/*Margenes.*/
+  	padding-top: 250px;
+
+  	/*Posicion.*/
+  	left: 0;
+  	/*display: flex;*/
+  	justify-content: space-between | space-around;
+  	position: flex;
+
+  	/*Scroll.*/
+  	scroll-behavior: smooth;
+  	overflow-x: hidden;
+  	/*overflow-y: scroll;*/
+}
+
+
+section.splitleft{
+
+	/*Tamaño.*/
+	width: 200px;
+	min-width: 200px;
+	height: 100%;
+	min-height: 480px;
+
+	/*Margenes.*/
+	padding-top: 20px;
+	padding-left: 20px;
+
+	/*Posicion.*/
+	position: fixed;
+	z-index: 100;
+/*	float: left;
+	vertical-align: top;*/
+
+	/*Tipo.*/
+/*	display: flex;
+	zoom: 1;*/
+
+	/*Color.*/
+	background: #dddddd;
+}
+
+
+div.divdroplistnavigate{
+
+	/*Margenes*/
+	margin: 0px;
+	padding-left: 25px;
+
+	/*Posicion.*/
+	position: absolute;
+	text-align: center;
+	top: 20px;
+}
+
+
+section.splitright{
+
+	/*Tamaño.*/
+	/*width: 75%;*/
+	min-width: 360px;
+	height: 100%;
+	min-height: 600px;
+
+	/*Margenes.*/
+	margin-left: 200px;
+	padding: 20px;
+
+	/*Posicion.*/
+	float: left;
+	vertical-align: top;
+
+	/*Tipo.*/
+	display: inline-block;
+	zoom: 1;
+
+	/*Color.*/
+	background: #ffffff;
+}
+
+
+/*Texto de introduccion.*/
+p.pintro{
+
+	/*Tamaño.*/
+	font-size: 1em;
+
+	/*Posicion.*/
+	text-align: center;
+
+	/*Tipo.*/
+	font-family: verdana;
+	font-weight: bold;
+}
+
+p.presume{
+
+	/*Tamaño.*/
+	font-size: 1em;
+
+	/*Margenes*/
+	margin-left: 20px;
+
+	/*Posicion.*/
+	text-align: left;
+
+	/*Tipo.*/
+	font-family: verdana;
+}
+
+
+/*Imagenes.*/
+div.divimageintro{
+
+	/*Posicion.*/
+	text-align: center;
+}
+
+#pimageintro img{
+	
+	/*Tamaño.*/
+	width: 500px;
+	height: auto;
+
+	/*Margenes.*/
+	margin: auto;
+
+	/*Posicion.*/
+	text-align: center;
+	vertical-align: middle;
+	object-position: center center;
+	object-fit: fill;
+}
+
+
+/*Listas de pie de pagina.*/
+footer.mainfooter{
+
+	/*Tamaño.*/
+
+	/*Margenes.*/
+	padding-top: 30px;
+	padding-bottom: 30px;
+
+	/*Posicion.*/
+	float: center;
+	float: bottom;
+	vertical-align: bottom;
+	text-align: center;
+
+	/*Tipo.*/
+	font-family: verdana;
+
+	/*Color.*/
+	background-color: #ffffff;
+}
+
+ul.ulfooter{
+
+	/*Margenes.*/
+	margin: 0;
+  	padding: 0;
+
+  	/*Posicion.*/
+	text-align: center;
+
+	/*Tipo.*/
+	display: inline-block;
+  	list-style-type: none;
+}
+
+li.lifooter{
+	
+	/*Margenes.*/
+	padding: 0px;
+
+	/*Posicion.*/
+	text-align: center;
+	display: flex;
+  	justify-content: space-between | space-around;
+
+	/*Tipo.*/
+	display: inline-block;
+	list-style-type: none;
+
+	/*Color.*/
+	background-color: #ffffff;
+
+}
+
+
+/*Diseño responsivo.*/
+@media screen and (max-width:480px){
+	body{
+		/*Tamaño.*/
+		font-size:80%;
+
+		/*background-image: url();*/
+	} 
+}
