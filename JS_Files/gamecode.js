@@ -134,7 +134,7 @@ var timedEvent;
 
 /*Inicializacion de variable del juego.*/
 var game = new Phaser.Game(config);
-game.world.setBounds(worldBoundsWidth, worldBoundsHeight);
+//this.world.setBounds(worldBoundsWidth, worldBoundsHeight);
 
 
 /*Funcion inicial*/
@@ -250,7 +250,7 @@ function create(){
 	vgmusic = this.sound.add("music");
 	var musicConfig = {
 		mute: false,
-		volume: 0.0,
+		volume: 0.4,
 		rate: 1,
 		detune: 0,  
 		seek: 0,
@@ -569,15 +569,15 @@ function create(){
 	this.anims.create({
 		key: "deadleft",
 		frames: this.anims.generateFrameNumbers("Eric_2", {start: 0, end: 13}),
-		framerate: 1,
-		repeat: 0
+		framerate: 4,
+		repeat: -1
 	});
 
 	this.anims.create({
 		key: "deadright",
 		frames: this.anims.generateFrameNumbers("Eric_2", {start: 14, end: 27}),
-		framerate: 1,
-		repeat: 0
+		framerate: 4,
+		repeat: -1
 	});
 
 
@@ -605,8 +605,9 @@ function create(){
 	/*Creacion del marcador.*/
 	scoreText = this.add.text(16, 16, "Score: 0", { fontFamily: "Verdana", fontSize: "24px", fill: "#fff" });
 	scoreParts = this.add.text(275, 16, "x0", { fontFamily: "Verdana", fontSize: "24px", fill: "#fff" });
-	screwTitle = this.add.sprite(250, 30, "Assets", 0);
-	screwTitle.setScale(1.5);
+	screwTitle = this.add.sprite(250, 28, "Assets", 0);
+	screwTitle.setScale(1.25);
+	screwTitle.angle = 30;
 
 
 	/*Opciones de mundo.*/
@@ -623,8 +624,8 @@ function create(){
 
 
 	/*Creacion de la cuenta atrás.*/
-	this.initialTime = 150;
-	timeText = this.add.text(canvasWidth/2, 16, formatTime(this.initialTime), { fontFamily: "Verdana", fontSize: "24px", fill: "#ff0000" });
+	this.initialTime = 60;
+	timeText = this.add.text(canvasWidth/2, 16, ("Time: " + formatTime(this.initialTime)), { fontFamily: "Verdana", fontSize: "24px", fill: "#ff0000" });
 	timedEvent = this.time.addEvent( { 
 		delay: 1000,
 		callback: onEvent,
@@ -648,19 +649,20 @@ function collectScrew (player, screw){
 
 
     /*Eric muere despues de recoger todos los tornillos.*/
-    if ((screws.length == counterParts) && (!(isPlayerDead))) {
+    if ((screws.countActive(true) === 0) && (!(isPlayerDead))) {
 
-    	//player.anims.pause();
     	isPlayerDead = true;
+    	gameOver = true;
 
     	if (isPlayerLeft){
     		player.anims.play("deadleft", true);
     	} else {
     		player.anims.play("deadright", true);
     	}
-    	player.body.stop();
+
+    	//player.anims.pause();
     	//game.pause = true;
-    	//alert("Game Over");
+    	alert("All the parts were found!" + "\n" + "Game Over");
 
     } else {
     	isPlayerDead = false;
@@ -687,7 +689,7 @@ function onEvent (){
 
     this.initialTime -= 1;
 
-    timeText.setText(formatTime(this.initialTime));
+    timeText.setText("Time: " + formatTime(this.initialTime));
 }
 
 
@@ -704,7 +706,9 @@ function update(){
 				child.anims.play("screwA");
 			} else {
 				child.anims.play("screwB");
+
 			}
+			child.angle = Phaser.Math.Between(0, 360);
     	});
 
 		screwTitle.anims.play("screwB");
@@ -992,6 +996,9 @@ function update(){
 		isPlayerFiring = false;
 
 	}
+
+
+
 
 }
 
