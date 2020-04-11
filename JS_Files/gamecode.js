@@ -95,6 +95,9 @@ var enemy;
 
 var score = 0;
 var scoreText;
+var counterParts = 0;
+var scoreParts;
+var screwTitle;
 
 var vgmusic;
 var vgsoundeffects;
@@ -120,7 +123,13 @@ const cameraMarginY = 20;
 
 var isPlayerDead = false;
 var isPlayerFiring = false;
-//var spaceBar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+
+// var initialTime;
+// var currentTime;
+// var checkTime;
+
+var timeText;
+var timedEvent;
 
 
 /*Inicializacion de variable del juego.*/
@@ -595,6 +604,9 @@ function create(){
 
 	/*Creacion del marcador.*/
 	scoreText = this.add.text(16, 16, "Score: 0", { fontFamily: "Verdana", fontSize: "24px", fill: "#fff" });
+	scoreParts = this.add.text(275, 16, "x0", { fontFamily: "Verdana", fontSize: "24px", fill: "#fff" });
+	screwTitle = this.add.sprite(250, 30, "Assets", 0);
+	screwTitle.setScale(1.5);
 
 
 	/*Opciones de mundo.*/
@@ -609,6 +621,17 @@ function create(){
 
 	//sthis.cameras.main.preRender();
 
+
+	/*Creacion de la cuenta atrás.*/
+	this.initialTime = 150;
+	timeText = this.add.text(canvasWidth/2, 16, formatTime(this.initialTime), { fontFamily: "Verdana", fontSize: "24px", fill: "#ff0000" });
+	timedEvent = this.time.addEvent( { 
+		delay: 1000,
+		callback: onEvent,
+		callbackScope: this,
+		loop: true
+	});
+
 }
 
 
@@ -620,9 +643,12 @@ function collectScrew (player, screw){
     score += 25;
     scoreText.setText("Score: " + score);
 
+    counterParts +=1;
+    scoreParts.setText("x" + counterParts);
+
 
     /*Eric muere despues de recoger todos los tornillos.*/
-    if ((screws.countActive(true) == 0) && (!(isPlayerDead))) {
+    if ((screws.length == counterParts) && (!(isPlayerDead))) {
 
     	//player.anims.pause();
     	isPlayerDead = true;
@@ -644,6 +670,27 @@ function collectScrew (player, screw){
 }
 
 
+function formatTime(seconds){
+    
+    /*Minutos.*/
+    var minutes = Math.floor(seconds/60);
+
+    /*Segundos.*/
+    var partInSeconds = seconds%60;
+    partInSeconds = partInSeconds.toString().padStart(2,"0");
+
+	/*Formato de tiempo.*/
+    return (`${minutes}:${partInSeconds}`);
+}
+
+function onEvent (){
+
+    this.initialTime -= 1;
+
+    timeText.setText(formatTime(this.initialTime));
+}
+
+
 /*Actualiza la pantalla y el estado del videojuego*/
 function update(){
 
@@ -659,6 +706,9 @@ function update(){
 				child.anims.play("screwB");
 			}
     	});
+
+		screwTitle.anims.play("screwB");
+
 		startGame = true;
 	}
 
@@ -672,8 +722,11 @@ function update(){
 		if ((this.cameras.main.x) < 0 ){
 			this.cameras.main.x += cameraStepX;
 			scoreText.x -= cameraStepX;
-			this.background.x = -(this.cameras.main.x * 0.6);
-			this.decoration.x = (this.cameras.main.x * 0.7);
+			scoreParts.x -= cameraStepX;
+			screwTitle.x -= cameraStepX;
+			timeText.x -= cameraStepX;
+			this.background.x = -(this.cameras.main.x * 0.5);
+			this.decoration.x = -(this.cameras.main.x * 0.7);
 		}
 
 		//console.log("Left: " + isPlayerLeft);
@@ -690,8 +743,11 @@ function update(){
 		if ((this.cameras.main.x) < 0 ){
 			this.cameras.main.x += cameraStepX;
 			scoreText.x -= cameraStepX;
-			this.background.x = -(this.cameras.main.x * 0.6);
-			this.decoration.x = (this.cameras.main.x * 0.7);
+			scoreParts.x -= cameraStepX;
+			screwTitle.x -= cameraStepX;
+			timeText.x -= cameraStepX;
+			this.background.x = -(this.cameras.main.x * 0.5);
+			this.decoration.x = -(this.cameras.main.x * 0.7);
 		}
 
 		//console.log("Left: " + isPlayerLeft);
@@ -708,8 +764,11 @@ function update(){
 		if ((this.cameras.main.x) > (canvasWidth - worldBoundsWidth)){
 			this.cameras.main.x -= cameraStepX;
 			scoreText.x += cameraStepX;
-			this.background.x = -(this.cameras.main.x * 0.6);
-			this.decoration.x = (this.cameras.main.x * 0.7);
+			scoreParts.x += cameraStepX;
+			screwTitle.x += cameraStepX;
+			timeText.x += cameraStepX;
+			this.background.x = -(this.cameras.main.x * 0.5);
+			this.decoration.x = -(this.cameras.main.x * 0.7);
 		}
 
 		//console.log("Left: " + isPlayerLeft);
@@ -723,8 +782,11 @@ function update(){
 		if ((this.cameras.main.x) > (canvasWidth - worldBoundsWidth)){
 			this.cameras.main.x -= cameraStepX;
 			scoreText.x += cameraStepX;
-			this.background.x = -(this.cameras.main.x * 0.6);
-			this.decoration.x = (this.cameras.main.x * 0.7);
+			scoreParts.x += cameraStepX;
+			screwTitle.x += cameraStepX;
+			timeText.x += cameraStepX;
+			this.background.x = -(this.cameras.main.x * 0.5);
+			this.decoration.x = -(this.cameras.main.x * 0.7);
 		}
 
 		//console.log("Left: " + isPlayerLeft);
@@ -880,6 +942,9 @@ function update(){
 		// }
 
 		//vgsoundeffects.play(soundeffectsConfig);
+		if (!(vgsoundeffects.isPlaying)) {
+        	//vgsoundeffects.play(soundeffectsConfig);
+    	}
 
 
 	} else if ((this.spacebar.isDown) && (isPlayerFiring)){
@@ -907,6 +972,9 @@ function update(){
 		// }
 
 		//vgsoundeffects.play(soundeffectsConfig);
+		if (!(vgsoundeffects.isPlaying)) {
+        	//vgsoundeffects.play(soundeffectsConfig);
+    	}
 
 	} else {
 
