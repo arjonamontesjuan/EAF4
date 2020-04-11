@@ -103,6 +103,7 @@ var playerVelocityY = 360;
 
 var isPlayerCrouch = false;
 var isPlayerFall = false;
+var isPlayerOnAir = false;
 
 
 /*Funcion inicial*/
@@ -278,6 +279,10 @@ function create(){
 	//this.player.gravity.y = 300;
 	//this.player.body.setGravityY(300);
 	player.setCollideWorldBounds(true);
+	//player.body.setSize(32, 40, false);
+	//player.body.setSize(32, 48, -20, 24, false);
+	//player.body.setOffset(24, 0);
+	//player.body.reset();
 
 
 	/*Escalado de jugador.*/
@@ -355,14 +360,14 @@ function create(){
 	this.anims.create({
 		key: "idle1left",
 		frames: this.anims.generateFrameNumbers("Eric", {start: 20, end: 31}),
-		framerate: 2,
+		framerate: 32,
 		repeat: -1
 	});
 
 	this.anims.create({
 		key: "idle1right",
 		frames: this.anims.generateFrameNumbers("Eric", {start: 32, end: 43}),
-		framerate: 2,
+		framerate: 32,
 		repeat: -1
 	});
 
@@ -390,6 +395,13 @@ function create(){
 	});
 
 	this.anims.create({
+		key: "onairleft",
+		frames: [ { key: "Eric", frame: 69 } ],
+		framerate: 4,
+		repeat: 0
+	});
+
+	this.anims.create({
 		key: "fallleft",
 		frames: this.anims.generateFrameNumbers("Eric", {start: 69, end: 74}),
 		framerate: 4,
@@ -399,6 +411,13 @@ function create(){
 	this.anims.create({
 		key: "jumpright",
 		frames: this.anims.generateFrameNumbers("Eric", {start: 77, end: 81}),
+		framerate: 4,
+		repeat: 0
+	});
+
+	this.anims.create({
+		key: "onairleft",
+		frames: [ { key: "Eric", frame: 81 } ],
 		framerate: 4,
 		repeat: 0
 	});
@@ -607,10 +626,24 @@ function update(){
 		player.setVelocityY(-playerVelocityY);
 		player.anims.play("jumpleft", true);
 
-	} else if (cursors.up.isDown && player.body.touching.down && !(isPlayerLeft)){
+		isPlayerOnAir = true;
+
+	} else if (cursors.up.isDown && player.body.touching.down && (!(isPlayerLeft))){
 		player.setVelocityY(-playerVelocityY);
 		player.anims.play("jumpright", true);
 
+		isPlayerOnAir = true;
+	}
+
+
+	if ((isPlayerOnAir) && (!(isPlayerFall))) {
+
+		if (isPlayerLeft) {
+			player.anims.play("onairleft", true);
+		} else {
+			player.anims.play("onairright", true);
+		}
+		
 	}
 
 
@@ -618,6 +651,7 @@ function update(){
 	if (player.body.velocity.y > 0){
 
 		isPlayerFall = true;
+		isPlayerOnAir = false;
 
 		if (isPlayerLeft) {
 			player.anims.play("fallleft", true);
