@@ -116,10 +116,10 @@ var isPlayerOnAir = false;
 //var camera
 var cameraBoundWidth = 1216;
 var cameraBoundHeight = 600;
-var cameraStepX = 1;
-var cameraStepY = 4;
-const cameraMarginX = 40;
-const cameraMarginY = 20;
+// var cameraStepX = 1;
+// var cameraStepY = 4;
+// const cameraMarginX = 40;
+// const cameraMarginY = 20;
 
 var isPlayerDead = false;
 var isPlayerFiring = false;
@@ -134,7 +134,7 @@ var timedEvent;
 
 /*Inicializacion de variable del juego.*/
 var game = new Phaser.Game(config);
-game.world.setBounds(worldBoundsWidth, worldBoundsHeight);
+// game.world.setBounds(worldBoundsWidth, worldBoundsHeight);
 
 
 /*Funcion inicial*/
@@ -222,7 +222,8 @@ function create(){
 	//console.log("create");
 
 	/*Creacion de los limites de la pantalla.*/
-	//this.world.setBounds(0, 0, worldBoundsWidth, worldBoundsHeight);
+	this.cameras.main.setBounds(0, 0, worldBoundsWidth, worldBoundsHeight);
+	this.physics.world.setBounds(0, 0, worldBoundsWidth, worldBoundsHeight);
 
 
 	/*Creacion de las imagenes.*/
@@ -270,44 +271,6 @@ function create(){
 		loop: false,
 		delay: 0
 	}
-
-
-	// this.clankSound01 = this.sound.add("Clank_01");
-	// this.clankSound02 = this.sound.add("Clank_02");
-	// this.clankSound03 = this.sound.add("Clank_03");
-	// this.clankSound04 = this.sound.add("Clank_04");
-	// this.clankSound05 = this.sound.add("Clank_05");
-	// this.clankSound06 = this.sound.add("Clank_06");
-	// this.clankSound07 = this.sound.add("Clank_07");
-	// this.clankSound08 = this.sound.add("Clank_08");
-	// this.clankSound09 = this.sound.add("Clank_09");
-	// this.clankSound10 = this.sound.add("Clank_10");
-
-	// this.laserRicoSound01 = this.sound.add("Laser-Ricochet1");
-	// this.laserRicoSound02 = this.sound.add("Laser-Ricochet2");
-	// this.laserRicoSound03 = this.sound.add("Laser-Ricochet3");
-
-	// this.laserShotSound01 = this.sound.add("Laser-Shot1");
-	// this.laserShotSound02 = this.sound.add("Laser-Shot2");
-	// this.laserShotSound03 = this.sound.add("Laser-Shot3");
-
-	// this.rezAlertSound01 = this.sound.add("RezAlert1");
-	// this.rezAlertSound02 = this.sound.add("RezAlert2");
-	// this.rezAlertSound03 = this.sound.add("RezAlert3");
-	// this.rezAlertSound04 = this.sound.add("RezAlert4");
-
-	// this.footStepSound01 = this.sound.add("Robot-Footstep_1");
-	// this.footStepSound02 = this.sound.add("Robot-Footstep_2");
-	// this.footStepSound03 = this.sound.add("Robot-Footstep_3");
-	// this.footStepSound04 = this.sound.add("Robot-Footstep_4");
-	// this.footStepSound05 = this.sound.add("Robot-Footstep_5");
-	// this.footStepSound06 = this.sound.add("Robot-Footstep_6");
-	// this.footStepSound07 = this.sound.add("Robot-Footstep_7");
-	// this.footStepSound08 = this.sound.add("Robot-Footstep_8");
-
-
-	//this.beamSound = this.sound.add("Laser-Shot1");
-	//this.pickupSound = this.sound.add("RezAlert1");
 
 
 	/*Creacion de las instancias de suelo y plataformas fisicas.*/
@@ -371,231 +334,7 @@ function create(){
 
 
 	/*Creacion de las animaciones del personaje.*/
-	/*Agacharse.*/
-	this.anims.create({
-		key: "crouchleft",
-		frames: [ { key: "Eric", frame: 5 } ],
-		framerate: 2,
-		repeat: 0
-	});
-
-	this.anims.create({
-		key: "standleft",
-		frames: this.anims.generateFrameNumbers("Eric", {start: 5, end: 9}),
-		framerate: 2,
-		repeat: 0
-	});
-
-	this.anims.create({
-		key: "crouchright",
-		frames: [ { key: "Eric", frame: 15 } ],
-		framerate: 2,
-		repeat: 0
-	});
-
-	this.anims.create({
-		key: "standright",
-		frames: this.anims.generateFrameNumbers("Eric", {start: 15, end: 19}),
-		framerate: 2,
-		repeat: 0
-	});
-
-	this.anims.create({
-        key: "turncrouchleft",
-        frames: [ { key: "Eric", frame: 15 } ],
-        frameRate: 2,
-        repeat: 0
-    });
-
-    this.anims.create({
-        key: "turncrouchright",
-        frames: [ { key: "Eric", frame: 5 } ],
-        frameRate: 2,
-        repeat: 0
-    });
-
-
-	/*Idle.*/
-	this.anims.create({
-		key: "idle1left",
-		frames: this.anims.generateFrameNumbers("Eric", {start: 20, end: 31}),
-		framerate: 1,
-		repeat: -1
-	});
-
-	this.anims.create({
-		key: "idle1right",
-		frames: this.anims.generateFrameNumbers("Eric", {start: 32, end: 43}),
-		framerate: 1,
-		repeat: -1
-	});
-
-	this.anims.create({
-		key: "idle2left",
-		frames: this.anims.generateFrameNumbers("Eric", {start: 44, end: 53}),
-		framerate: 2,
-		repeat: -1
-	});
-
-	this.anims.create({
-		key: "idle2right",
-		frames: this.anims.generateFrameNumbers("Eric", {start: 54, end: 63}),
-		framerate: 2,
-		repeat: -1
-	});
-
-
-	/*Saltar.*/
-	this.anims.create({
-		key: "jumpleft",
-		frames: this.anims.generateFrameNumbers("Eric", {start: 65, end: 69}),
-		framerate: 4,
-		repeat: 0
-	});
-
-	this.anims.create({
-		key: "onairleft",
-		frames: [ { key: "Eric", frame: 69 } ],
-		framerate: 4,
-		repeat: 0
-	});
-
-	this.anims.create({
-		key: "fallleft",
-		frames: this.anims.generateFrameNumbers("Eric", {start: 69, end: 74}),
-		framerate: 4,
-		repeat: 0
-	});
-
-	this.anims.create({
-		key: "jumpright",
-		frames: this.anims.generateFrameNumbers("Eric", {start: 77, end: 81}),
-		framerate: 4,
-		repeat: 0
-	});
-
-	this.anims.create({
-		key: "onairright",
-		frames: [ { key: "Eric", frame: 81 } ],
-		framerate: 4,
-		repeat: 0
-	});
-
-	this.anims.create({
-		key: "fallright",
-		frames: this.anims.generateFrameNumbers("Eric", {start: 81, end: 86}),
-		framerate: 4,
-		repeat: 0
-	});
-
-
-	/*Girarse.*/
-	this.anims.create({
-		key: "turnleft",
-		frames: this.anims.generateFrameNumbers("Eric", {start: 88, end: 91}),
-		framerate: 4,
-		repeat: 0
-	});
-
-	this.anims.create({
-		key: "turnright",
-		frames: this.anims.generateFrameNumbers("Eric", {start: 92, end: 95}),
-		framerate: 4,
-		repeat: 0
-	});
-
-
-	/*Caminar.*/
-	this.anims.create({
-		key: "walkleft",
-		frames: this.anims.generateFrameNumbers("Eric", {start: 96, end: 109}),
-		framerate: 14,
-		repeat: 0
-	});
-
-	this.anims.create({
-		key: "walkright",
-		frames: this.anims.generateFrameNumbers("Eric", {start: 110, end: 121}),
-		framerate: 14,
-		repeat: 0
-	});
-
-
-	/*Disparar y guardar el arma.*/
-	this.anims.create({
-		key: "fireleft",
-		frames: this.anims.generateFrameNumbers("Eric_2", {start: 28, end: 31}),
-		framerate: 2,
-		repeat: 0
-	});
-
-	this.anims.create({
-		key: "firingleft",
-		frames: this.anims.generateFrameNumbers("Eric_2", {start: 31, end: 34}),
-		framerate: 2,
-		repeat: 0
-	});
-
-	this.anims.create({
-		key: "unfireleft",
-		frames: this.anims.generateFrameNumbers("Eric_2", {start: 34, end: 37}),
-		framerate: 2,
-		repeat: 0
-	});
-
-	this.anims.create({
-		key: "fireright",
-		frames: this.anims.generateFrameNumbers("Eric_2", {start: 38, end: 41}),
-		framerate: 2,
-		repeat: 0
-	});
-
-	this.anims.create({
-		key: "firingright",
-		frames: this.anims.generateFrameNumbers("Eric_2", {start: 41, end: 44}),
-		framerate: 2,
-		repeat: 0
-	});
-
-	this.anims.create({
-		key: "unfireright",
-		frames: this.anims.generateFrameNumbers("Eric_2", {start: 44, end: 47}),
-		framerate: 2,
-		repeat: 0
-	});
-
-
-	/*Morir.*/
-	this.anims.create({
-		key: "deadleft",
-		frames: this.anims.generateFrameNumbers("Eric_2", {start: 0, end: 13}),
-		framerate: 1,
-		repeat: 0
-	});
-
-	this.anims.create({
-		key: "deadright",
-		frames: this.anims.generateFrameNumbers("Eric_2", {start: 14, end: 27}),
-		framerate: 1,
-		repeat: 0
-	});
-
-
-	/*Animacion de los assets.*/
-	this.anims.create({
-		key: "screwA",
-		frames: this.anims.generateFrameNumbers("Assets", {start: 0, end: 8}),
-		framerate: 10,
-		repeat: -1
-	});
-
-	this.anims.create({
-		key: "screwB",
-		frames: this.anims.generateFrameNumbers("Assets", {start: 9, end: 17}),
-		framerate: 2,
-		repeat: -1
-	});
-
+	createAnimations(this.anims);
 
 	/*Creacion de controles de teclado.*/
 	cursors = this.input.keyboard.createCursorKeys();
@@ -613,13 +352,8 @@ function create(){
 	//game.world.setBounds(0, 0, 1000, worldBoundsHeight);
 
 	/*Creacion de la camara para seguir al jugador.*/
-	//camera = new Phaser.Camera(0, 0, worldBoundsWidth, worldBoundsHeight);
-	//camera.setBounds(0, 0, worldBoundsWidth, worldBoundsHeight);
-	this.cameras.main.setBounds(0, 0, worldBoundsWidth, worldBoundsHeight);
 	this.cameras.main.centerOn(0, 0);
-	//this.cameras.follow(player, Phaser.Camera.FOLLOW_PLATFORMER);
-
-	//sthis.cameras.main.preRender();
+	this.cameras.main.startFollow(player, true);
 
 
 	/*Creacion de la cuenta atrás.*/
@@ -741,7 +475,7 @@ function update(){
 		player.anims.play("walkleft", true);
 
 		if ((this.cameras.main.x) < 0 ){
-			this.cameras.main.x += cameraStepX;
+			// this.cameras.main.x += cameraStepX;
 			scoreText.x -= cameraStepX;
 			scoreParts.x -= cameraStepX;
 			screwTitle.x -= cameraStepX;
@@ -762,13 +496,13 @@ function update(){
 		player.anims.play("walkright", true);
 
 		if ((this.cameras.main.x) > (canvasWidth - worldBoundsWidth)){
-			this.cameras.main.x -= cameraStepX;
-			scoreText.x += cameraStepX;
-			scoreParts.x += cameraStepX;
-			screwTitle.x += cameraStepX;
-			timeText.x += cameraStepX;
-			this.background.x = -(this.cameras.main.x * 0.5);
-			this.decoration.x = -(this.cameras.main.x * 0.7);
+			// this.cameras.main.x -= cameraStepX;
+			// scoreText.x += cameraStepX;
+			// scoreParts.x += cameraStepX;
+			// screwTitle.x += cameraStepX;
+			// timeText.x += cameraStepX;
+			// this.background.x = -(this.cameras.main.x * 0.5);
+			// this.decoration.x = -(this.cameras.main.x * 0.7);
 		}
 
 		//console.log("Left: " + isPlayerLeft);
@@ -780,13 +514,13 @@ function update(){
 		//isPlayerLeft = false;
 
 		if ((this.cameras.main.x) > (canvasWidth - worldBoundsWidth)){
-			this.cameras.main.x -= cameraStepX;
-			scoreText.x += cameraStepX;
-			scoreParts.x += cameraStepX;
-			screwTitle.x += cameraStepX;
-			timeText.x += cameraStepX;
-			this.background.x = -(this.cameras.main.x * 0.5);
-			this.decoration.x = -(this.cameras.main.x * 0.7);
+			// this.cameras.main.x -= cameraStepX;
+			// scoreText.x += cameraStepX;
+			// scoreParts.x += cameraStepX;
+			// screwTitle.x += cameraStepX;
+			// timeText.x += cameraStepX;
+			// this.background.x = -(this.cameras.main.x * 0.5);
+			// this.decoration.x = -(this.cameras.main.x * 0.7);
 		}
 
 		//console.log("Left: " + isPlayerLeft);
@@ -1005,3 +739,233 @@ function render(){
 
 // game.state.add("gameplay");
 // game.state.start("gameplay");
+
+
+function createAnimations(anims){
+
+	/*Agacharse.*/
+	anims.create({
+		key: "crouchleft",
+		frames: [ { key: "Eric", frame: 5 } ],
+		framerate: 2,
+		repeat: 0
+	});
+
+	anims.create({
+		key: "standleft",
+		frames: anims.generateFrameNumbers("Eric", {start: 5, end: 9}),
+		framerate: 2,
+		repeat: 0
+	});
+
+	anims.create({
+		key: "crouchright",
+		frames: [ { key: "Eric", frame: 15 } ],
+		framerate: 2,
+		repeat: 0
+	});
+
+	anims.create({
+		key: "standright",
+		frames: anims.generateFrameNumbers("Eric", {start: 15, end: 19}),
+		framerate: 2,
+		repeat: 0
+	});
+
+	anims.create({
+        key: "turncrouchleft",
+        frames: [ { key: "Eric", frame: 15 } ],
+        frameRate: 2,
+        repeat: 0
+    });
+
+    anims.create({
+        key: "turncrouchright",
+        frames: [ { key: "Eric", frame: 5 } ],
+        frameRate: 2,
+        repeat: 0
+    });
+
+
+	/*Idle.*/
+	anims.create({
+		key: "idle1left",
+		frames: anims.generateFrameNumbers("Eric", {start: 20, end: 31}),
+		framerate: 1,
+		repeat: -1
+	});
+
+	anims.create({
+		key: "idle1right",
+		frames: anims.generateFrameNumbers("Eric", {start: 32, end: 43}),
+		framerate: 1,
+		repeat: -1
+	});
+
+	anims.create({
+		key: "idle2left",
+		frames: anims.generateFrameNumbers("Eric", {start: 44, end: 53}),
+		framerate: 2,
+		repeat: -1
+	});
+
+	anims.create({
+		key: "idle2right",
+		frames: anims.generateFrameNumbers("Eric", {start: 54, end: 63}),
+		framerate: 2,
+		repeat: -1
+	});
+
+
+	/*Saltar.*/
+	anims.create({
+		key: "jumpleft",
+		frames: anims.generateFrameNumbers("Eric", {start: 65, end: 69}),
+		framerate: 4,
+		repeat: 0
+	});
+
+	anims.create({
+		key: "onairleft",
+		frames: [ { key: "Eric", frame: 69 } ],
+		framerate: 4,
+		repeat: 0
+	});
+
+	anims.create({
+		key: "fallleft",
+		frames: anims.generateFrameNumbers("Eric", {start: 69, end: 74}),
+		framerate: 4,
+		repeat: 0
+	});
+
+	anims.create({
+		key: "jumpright",
+		frames: anims.generateFrameNumbers("Eric", {start: 77, end: 81}),
+		framerate: 4,
+		repeat: 0
+	});
+
+	anims.create({
+		key: "onairright",
+		frames: [ { key: "Eric", frame: 81 } ],
+		framerate: 4,
+		repeat: 0
+	});
+
+	anims.create({
+		key: "fallright",
+		frames: anims.generateFrameNumbers("Eric", {start: 81, end: 86}),
+		framerate: 4,
+		repeat: 0
+	});
+
+
+	/*Girarse.*/
+	anims.create({
+		key: "turnleft",
+		frames: anims.generateFrameNumbers("Eric", {start: 88, end: 91}),
+		framerate: 4,
+		repeat: 0
+	});
+
+	anims.create({
+		key: "turnright",
+		frames: anims.generateFrameNumbers("Eric", {start: 92, end: 95}),
+		framerate: 4,
+		repeat: 0
+	});
+
+
+	/*Caminar.*/
+	anims.create({
+		key: "walkleft",
+		frames: anims.generateFrameNumbers("Eric", {start: 96, end: 109}),
+		framerate: 14,
+		repeat: 0
+	});
+
+	anims.create({
+		key: "walkright",
+		frames: anims.generateFrameNumbers("Eric", {start: 110, end: 121}),
+		framerate: 14,
+		repeat: 0
+	});
+
+
+	/*Disparar y guardar el arma.*/
+	anims.create({
+		key: "fireleft",
+		frames: anims.generateFrameNumbers("Eric_2", {start: 28, end: 31}),
+		framerate: 2,
+		repeat: 0
+	});
+
+	anims.create({
+		key: "firingleft",
+		frames: anims.generateFrameNumbers("Eric_2", {start: 31, end: 34}),
+		framerate: 2,
+		repeat: 0
+	});
+
+	anims.create({
+		key: "unfireleft",
+		frames: anims.generateFrameNumbers("Eric_2", {start: 34, end: 37}),
+		framerate: 2,
+		repeat: 0
+	});
+
+	anims.create({
+		key: "fireright",
+		frames: anims.generateFrameNumbers("Eric_2", {start: 38, end: 41}),
+		framerate: 2,
+		repeat: 0
+	});
+
+	anims.create({
+		key: "firingright",
+		frames: anims.generateFrameNumbers("Eric_2", {start: 41, end: 44}),
+		framerate: 2,
+		repeat: 0
+	});
+
+	anims.create({
+		key: "unfireright",
+		frames: anims.generateFrameNumbers("Eric_2", {start: 44, end: 47}),
+		framerate: 2,
+		repeat: 0
+	});
+
+
+	/*Morir.*/
+	anims.create({
+		key: "deadleft",
+		frames: anims.generateFrameNumbers("Eric_2", {start: 0, end: 13}),
+		framerate: 1,
+		repeat: 0
+	});
+
+	anims.create({
+		key: "deadright",
+		frames: anims.generateFrameNumbers("Eric_2", {start: 14, end: 27}),
+		framerate: 1,
+		repeat: 0
+	});
+
+
+	/*Animacion de los assets.*/
+	anims.create({
+		key: "screwA",
+		frames: anims.generateFrameNumbers("Assets", {start: 0, end: 8}),
+		framerate: 10,
+		repeat: -1
+	});
+
+	anims.create({
+		key: "screwB",
+		frames: anims.generateFrameNumbers("Assets", {start: 9, end: 17}),
+		framerate: 2,
+		repeat: -1
+	});
+
+}
