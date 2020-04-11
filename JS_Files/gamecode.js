@@ -30,6 +30,9 @@ const vgcanvas = "videogamecontainer";
 // ctx.webkitImageSmoothingEnabled = false;
 // ctx.imageSmoothingEnabled = false;
 
+const canvasWidth = 1024;
+const canvasHeight = 600;
+
 
 /*Variable de configuracion del juego.*/
 var config = {
@@ -38,8 +41,8 @@ var config = {
 	type: Phaser.AUTO,
 
 	/*Medidas del canvas*/
-	width: 1024,
-	height: 600,
+	width: canvasWidth,
+	height: canvasHeight,
 
 	/*Container*/
 	parent: vgcanvas,
@@ -81,7 +84,7 @@ var game = new Phaser.Game(config);
 
 
 /*Declaracion de variables.*/
-var worldBoundsWidth = 2000;
+var worldBoundsWidth = 1600;
 var worldBoundsHeight = 600;
 
 var background; 
@@ -112,6 +115,8 @@ var isPlayerOnAir = false;
 //var camera
 var cameraBoundWidth = 1024;
 var cameraBoundHeight = 600;
+var cameraStepX = 2;
+var cameraStepY = 4;
 
 
 /*Funcion inicial*/
@@ -291,6 +296,7 @@ function create(){
 	//this.player.gravity.y = 300;
 	//this.player.body.setGravityY(300);
 	player.setCollideWorldBounds(true);
+	//player.body.onWorldBounds = true;
 
 
 	/*Escalado de jugador.*/
@@ -500,13 +506,15 @@ function create(){
 	scoreText = this.add.text(16, 16, "Score: 0", { fontFamily: "Verdana", fontSize: "24px", fill: "#fff" });
 
 
-	/*Opciones de camara.*/
-	//this.camera.follow(player);
+	/*Opciones de mundo.*/
+	//game.world.setBounds(0, 0, 1000, worldBoundsHeight);
 
 	/*Creacion de la camara para seguir al jugador.*/
-	//camera = this.camera;
-	//this.camera.setBounds(0, 0, worldBoundsWidth, worldBoundsHeight);
-	//this.camera.follow(player);
+	//camera = new Phaser.Camera(0, 0, worldBoundsWidth, worldBoundsHeight);
+	//camera.setBounds(0, 0, worldBoundsWidth, worldBoundsHeight);
+	this.cameras.main.setBounds(0, 0, worldBoundsWidth, worldBoundsHeight);
+	this.cameras.main.centerOn(0, 0);
+	//this.cameras.follow(player, Phaser.Camera.FOLLOW_PLATFORMER);
 
 }
 
@@ -545,7 +553,12 @@ function update(){
 		player.anims.play("walkleft", true);
 		//isPlayerLeft = true;
 
+		if ((this.cameras.main.x) < 0 ){
+			this.cameras.main.x += cameraStepX;
+		}
+
 		console.log("Left: " + isPlayerLeft);
+		console.log("CameraX: " + this.cameras.main.x);
 
 	} else if ((cursors.left.isDown) && !(isPlayerLeft)){
 		player.setVelocityX(0);
@@ -554,7 +567,12 @@ function update(){
 		player.setVelocityX(-playerVelocityX);
 		player.anims.play("walkleft", true);
 
+		if ((this.cameras.main.x) < 0 ){
+			this.cameras.main.x += cameraStepX;
+		}
+
 		console.log("Left: " + isPlayerLeft);
+		console.log("CameraX: " + this.cameras.main.x);
 
 	} else if ((cursors.right.isDown) && (isPlayerLeft)){
 		player.setVelocityX(0);
@@ -563,14 +581,24 @@ function update(){
 		player.setVelocityX(playerVelocityX);
 		player.anims.play("walkright", true);
 
+		if ((this.cameras.main.x) > (canvasWidth - worldBoundsWidth)){
+			this.cameras.main.x -= cameraStepX;
+		}
+
 		console.log("Left: " + isPlayerLeft);
+		console.log("CameraX: " + this.cameras.main.x);
 
 	} else if ((cursors.right.isDown) && !(isPlayerLeft)){
 		player.setVelocityX(playerVelocityX);
 		player.anims.play("walkright", true);
 		//isPlayerLeft = false;
 
+		if ((this.cameras.main.x) > (canvasWidth - worldBoundsWidth)){
+			this.cameras.main.x -= cameraStepX;
+		}
+
 		console.log("Left: " + isPlayerLeft);
+		console.log("CameraX: " + this.cameras.main.x);
 
 
 	} else {
