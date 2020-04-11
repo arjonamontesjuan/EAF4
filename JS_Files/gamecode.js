@@ -134,7 +134,7 @@ var timedEvent;
 
 /*Inicializacion de variable del juego.*/
 var game = new Phaser.Game(config);
-game.world.setBounds(worldBoundsWidth, worldBoundsHeight);
+//this.world.setBounds(worldBoundsWidth, worldBoundsHeight);
 
 
 /*Funcion inicial*/
@@ -605,8 +605,9 @@ function create(){
 	/*Creacion del marcador.*/
 	scoreText = this.add.text(16, 16, "Score: 0", { fontFamily: "Verdana", fontSize: "24px", fill: "#fff" });
 	scoreParts = this.add.text(275, 16, "x0", { fontFamily: "Verdana", fontSize: "24px", fill: "#fff" });
-	screwTitle = this.add.sprite(250, 30, "Assets", 0);
-	screwTitle.setScale(1.5);
+	screwTitle = this.add.sprite(250, 28, "Assets", 0);
+	screwTitle.setScale(1.25);
+	screwTitle.angle = 30;
 
 
 	/*Opciones de mundo.*/
@@ -623,8 +624,8 @@ function create(){
 
 
 	/*Creacion de la cuenta atrás.*/
-	this.initialTime = 150;
-	timeText = this.add.text(canvasWidth/2, 16, formatTime(this.initialTime), { fontFamily: "Verdana", fontSize: "24px", fill: "#ff0000" });
+	this.initialTime = 60;
+	timeText = this.add.text(canvasWidth/2, 16, ("Time: " + formatTime(this.initialTime)), { fontFamily: "Verdana", fontSize: "24px", fill: "#ff0000" });
 	timedEvent = this.time.addEvent( { 
 		delay: 1000,
 		callback: onEvent,
@@ -687,7 +688,7 @@ function onEvent (){
 
     this.initialTime -= 1;
 
-    timeText.setText(formatTime(this.initialTime));
+    timeText.setText("Time: " + formatTime(this.initialTime));
 }
 
 
@@ -704,7 +705,9 @@ function update(){
 				child.anims.play("screwA");
 			} else {
 				child.anims.play("screwB");
+
 			}
+			child.angle = Phaser.Math.Between(0, 360);
     	});
 
 		screwTitle.anims.play("screwB");
