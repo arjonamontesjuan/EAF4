@@ -270,7 +270,7 @@ function create(){
 
 
 	/*Creacion de instancia jugador.*/
-	player = this.physics.add.sprite(200, 192, "Eric");
+	player = this.physics.add.sprite(200, 192, "Eric", 0);
 
 
 	/*Propiedades fisicas de jugador.*/
@@ -310,44 +310,44 @@ function create(){
 	/*Agacharse.*/
 	this.anims.create({
 		key: "crouchleft",
-		frames: this.anims.generateFrameNumbers("Eric", {start: 1, end: 4}),
-		framerate: 4,
-		repeat: 0,
+		frames: [ { key: "Eric", frame: 5 } ],
+		framerate: 6,
+		repeat: 0
 	});
 
 	this.anims.create({
 		key: "standleft",
 		frames: this.anims.generateFrameNumbers("Eric", {start: 5, end: 9}),
-		framerate: 4,
-		repeat: 0,
+		framerate: 6,
+		repeat: 0
 	});
 
 	this.anims.create({
 		key: "crouchright",
-		frames: this.anims.generateFrameNumbers("Eric", {start: 11, end: 15}),
+		frames: [ { key: "Eric", frame: 15 } ],
 		framerate: 4,
-		repeat: 0,
+		repeat: 0
 	});
 
 	this.anims.create({
 		key: "standright",
 		frames: this.anims.generateFrameNumbers("Eric", {start: 15, end: 19}),
 		framerate: 4,
-		repeat: 0,
+		repeat: 0
 	});
 
 	this.anims.create({
         key: "turncrouchleft",
         frames: [ { key: "Eric", frame: 15 } ],
         frameRate: 2,
-        repeat: 0,
+        repeat: 0
     });
 
     this.anims.create({
         key: "turncrouchright",
         frames: [ { key: "Eric", frame: 5 } ],
         frameRate: 2,
-        repeat: 0,
+        repeat: 0
     });
 
 
@@ -356,28 +356,28 @@ function create(){
 		key: "idle1left",
 		frames: this.anims.generateFrameNumbers("Eric", {start: 20, end: 31}),
 		framerate: 2,
-		repeat: -1,
+		repeat: -1
 	});
 
 	this.anims.create({
 		key: "idle1right",
 		frames: this.anims.generateFrameNumbers("Eric", {start: 32, end: 43}),
 		framerate: 2,
-		repeat: -1,
+		repeat: -1
 	});
 
 	this.anims.create({
 		key: "idle2left",
 		frames: this.anims.generateFrameNumbers("Eric", {start: 44, end: 53}),
 		framerate: 2,
-		repeat: -1,
+		repeat: -1
 	});
 
 	this.anims.create({
 		key: "idle2right",
 		frames: this.anims.generateFrameNumbers("Eric", {start: 54, end: 63}),
 		framerate: 2,
-		repeat: -1,
+		repeat: -1
 	});
 
 
@@ -386,28 +386,28 @@ function create(){
 		key: "jumpleft",
 		frames: this.anims.generateFrameNumbers("Eric", {start: 65, end: 69}),
 		framerate: 4,
-		repeat: 0,
+		repeat: 0
 	});
 
 	this.anims.create({
 		key: "fallleft",
 		frames: this.anims.generateFrameNumbers("Eric", {start: 69, end: 74}),
 		framerate: 4,
-		repeat: 0,
+		repeat: 0
 	});
 
 	this.anims.create({
 		key: "jumpright",
 		frames: this.anims.generateFrameNumbers("Eric", {start: 77, end: 81}),
 		framerate: 4,
-		repeat: 0,
+		repeat: 0
 	});
 
 	this.anims.create({
 		key: "fallright",
 		frames: this.anims.generateFrameNumbers("Eric", {start: 81, end: 86}),
 		framerate: 4,
-		repeat: 0,
+		repeat: 0
 	});
 
 
@@ -416,14 +416,14 @@ function create(){
 		key: "turnleft",
 		frames: this.anims.generateFrameNumbers("Eric", {start: 88, end: 91}),
 		framerate: 4,
-		repeat: 0,
+		repeat: 0
 	});
 
 	this.anims.create({
 		key: "turnright",
 		frames: this.anims.generateFrameNumbers("Eric", {start: 92, end: 95}),
 		framerate: 4,
-		repeat: 0,
+		repeat: 0
 	});
 
 
@@ -432,14 +432,14 @@ function create(){
 		key: "walkleft",
 		frames: this.anims.generateFrameNumbers("Eric", {start: 96, end: 109}),
 		framerate: 14,
-		repeat: 0,
+		repeat: 0
 	});
 
 	this.anims.create({
 		key: "walkright",
 		frames: this.anims.generateFrameNumbers("Eric", {start: 110, end: 121}),
 		framerate: 14,
-		repeat: 0,
+		repeat: 0
 	});
 
 
@@ -447,14 +447,14 @@ function create(){
 	// 	key: "screwA",
 	// 	frames: this.anims.generateFrameNumbers("Assets", {start: 0, end: 8}),
 	// 	framerate: 10,
-	// 	repeat: -1,
+	// 	repeat: -1
 	// });
 
 	// this.anims.create({
 	// 	key: "screwB",
 	// 	frames: this.anims.generateFrameNumbers("Assets", {start: 9, end: 17}),
 	// 	framerate: 10,
-	// 	repeat: -1,
+	// 	repeat: -1
 	// });
 
 
@@ -539,26 +539,28 @@ function update(){
 
 
 	/*Agacharse.*/
-	if (cursors.down.isDown) {
+	if (cursors.down.isDown){
 
 		player.setVelocityX(0);
 		isPlayerCrouch = true;
 
-		if (isPlayerLeft) {
-			player.anims.play("crouchleft", true);
 
-			console.log("Crouch: " + isPlayerCrouch);
+		if (isPlayerLeft){
+			player.anims.play("crouchleft", true);
+			//player.anims.pause();
 
 		} else {
 			player.anims.play("crouchright", true);
 
-			console.log("Crouch: " + isPlayerCrouch);
 		} 
+
+		console.log("Crouch: " + isPlayerCrouch);
+		
 
 
 		/*Girarse agachado.*/
 		if ((cursors.left.isDown) && (isPlayerLeft)){
-			console.log("Left: " + isPlayerLeft);
+			//console.log("Left: " + isPlayerLeft);
 
 		} else if ((cursors.left.isDown) && (!(isPlayerLeft))){
 			player.anims.play("turncrouchleft", true);
@@ -568,32 +570,33 @@ function update(){
 
 		} else if ((cursors.right.isDown) && (isPlayerLeft)){
 			player.anims.play("turncrouchright", true);
-			isPlayerLeft = true;
+			isPlayerLeft = false;
 
 			console.log("Left: " + isPlayerLeft);
 
 		} else if ((cursors.right.isDown) && (!(isPlayerLeft))){
+			//console.log("Left: " + isPlayerLeft);
 
-			console.log("Left: " + isPlayerLeft);
 		}
+
 
 	} else {
 
-		/*Levangtarse.*/
+		/*Levantarse.*/
 		if (isPlayerCrouch){
 
 			isPlayerCrouch = false;
 
-			if (isPlayerLeft)  {
+			if (isPlayerLeft) {
 				player.anims.play("standleft", true);
-
-				console.log("Crouch: " + isPlayerCrouch);
 
 			} else {
 				player.anims.play("standright", true);
 
-				console.log("Crouch: " + isPlayerCrouch);
 			}
+
+			console.log("Crouch: " + isPlayerCrouch);
+
 		}
 
 	}
