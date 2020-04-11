@@ -81,6 +81,9 @@ var game = new Phaser.Game(config);
 
 
 /*Declaracion de variables.*/
+var worldBoundsWidth = 2000;
+var worldBoundsHeight = 600;
+
 var background; 
 var decoration;
 var platforms; 
@@ -96,14 +99,19 @@ var scoreText;
 var vgmusic;
 
 var gameOver = false;
+var startGame = false;
 
 var isPlayerLeft = false;
 var playerVelocityX = 128;
-var playerVelocityY = 360;
+var playerVelocityY = 340;
 
 var isPlayerCrouch = false;
 var isPlayerFall = false;
 var isPlayerOnAir = false;
+
+//var camera
+var cameraBoundWidth = 1024;
+var cameraBoundHeight = 600;
 
 
 /*Funcion inicial*/
@@ -186,6 +194,10 @@ function preload(){
 function create(){
 
 	//console.log("create");
+
+	/*Creacion de los limites de la pantalla.*/
+	//this.world.setBounds(0, 0, worldBoundsWidth, worldBoundsHeight);
+
 
 	/*Creacion de las imagenes.*/
 	this.background = this.add.image(this.width, this.height, "background");
@@ -279,14 +291,17 @@ function create(){
 	//this.player.gravity.y = 300;
 	//this.player.body.setGravityY(300);
 	player.setCollideWorldBounds(true);
-	//player.body.setSize(32, 40, false);
-	//player.body.setSize(32, 48, -20, 24, false);
-	//player.body.setOffset(24, 0);
-	//player.body.reset();
 
 
 	/*Escalado de jugador.*/
 	player.setScale(2);
+
+	
+	//player.body.setSize(16, 40, 0, 0, false);
+	//player.anchor.setTo(0.5, 1);
+	player.body.setOffset(8, 8);
+	//player.body.reset();
+	player.body.setSize(12, 40, false);
 	
 
 	/*Creacion de colisiones del jugador.*/
@@ -316,28 +331,28 @@ function create(){
 	this.anims.create({
 		key: "crouchleft",
 		frames: [ { key: "Eric", frame: 5 } ],
-		framerate: 6,
+		framerate: 2,
 		repeat: 0
 	});
 
 	this.anims.create({
 		key: "standleft",
 		frames: this.anims.generateFrameNumbers("Eric", {start: 5, end: 9}),
-		framerate: 6,
+		framerate: 2,
 		repeat: 0
 	});
 
 	this.anims.create({
 		key: "crouchright",
 		frames: [ { key: "Eric", frame: 15 } ],
-		framerate: 4,
+		framerate: 2,
 		repeat: 0
 	});
 
 	this.anims.create({
 		key: "standright",
 		frames: this.anims.generateFrameNumbers("Eric", {start: 15, end: 19}),
-		framerate: 4,
+		framerate: 2,
 		repeat: 0
 	});
 
@@ -360,14 +375,14 @@ function create(){
 	this.anims.create({
 		key: "idle1left",
 		frames: this.anims.generateFrameNumbers("Eric", {start: 20, end: 31}),
-		framerate: 32,
+		framerate: 1,
 		repeat: -1
 	});
 
 	this.anims.create({
 		key: "idle1right",
 		frames: this.anims.generateFrameNumbers("Eric", {start: 32, end: 43}),
-		framerate: 32,
+		framerate: 1,
 		repeat: -1
 	});
 
@@ -416,7 +431,7 @@ function create(){
 	});
 
 	this.anims.create({
-		key: "onairleft",
+		key: "onairright",
 		frames: [ { key: "Eric", frame: 81 } ],
 		framerate: 4,
 		repeat: 0
@@ -462,19 +477,19 @@ function create(){
 	});
 
 
-	// this.anims.create({
-	// 	key: "screwA",
-	// 	frames: this.anims.generateFrameNumbers("Assets", {start: 0, end: 8}),
-	// 	framerate: 10,
-	// 	repeat: -1
-	// });
+	this.anims.create({
+		key: "screwA",
+		frames: this.anims.generateFrameNumbers("Assets", {start: 0, end: 8}),
+		framerate: 10,
+		repeat: -1
+	});
 
-	// this.anims.create({
-	// 	key: "screwB",
-	// 	frames: this.anims.generateFrameNumbers("Assets", {start: 9, end: 17}),
-	// 	framerate: 10,
-	// 	repeat: -1
-	// });
+	this.anims.create({
+		key: "screwB",
+		frames: this.anims.generateFrameNumbers("Assets", {start: 9, end: 17}),
+		framerate: 2,
+		repeat: -1
+	});
 
 
 	/*Creacion de controles de teclado.*/
@@ -486,6 +501,11 @@ function create(){
 
 
 	/*Opciones de camara.*/
+	//this.camera.follow(player);
+
+	/*Creacion de la camara para seguir al jugador.*/
+	//camera = this.camera;
+	//this.camera.setBounds(0, 0, worldBoundsWidth, worldBoundsHeight);
 	//this.camera.follow(player);
 
 }
@@ -505,6 +525,19 @@ function collectScrew (player, screw){
 function update(){
 
 	//console.log("update");
+	/*Iniciar animacion de los tornillos.*/
+	if (!(startGame)){
+		//screw.anims.play("screwB");
+		screws.children.iterate(function (child) {
+			if (Phaser.Math.Between(0, 1)<0.5){
+				child.anims.play("screwA");
+			} else {
+				child.anims.play("screwB");
+			}
+    	});
+		startGame = true;
+	}
+
 
 	/*Caminar a izquierda y derecha.*/
 	if ((cursors.left.isDown) && (isPlayerLeft)){

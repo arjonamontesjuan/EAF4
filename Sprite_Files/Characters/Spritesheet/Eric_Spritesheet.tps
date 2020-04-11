@@ -307,7 +307,7 @@
             <key type="filename">../Eric_Walk_Right/Eric_Walk_Right_13.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
-                <point_f>0.5,1</point_f>
+                <point_f>0,1</point_f>
                 <key>spriteScale</key>
                 <double>1</double>
                 <key>scale9Enabled</key>
