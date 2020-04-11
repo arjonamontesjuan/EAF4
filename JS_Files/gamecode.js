@@ -285,6 +285,7 @@ function create(){
 	platforms.create(500, 352, "platform").setOrigin(0,0).refreshBody();
 	platforms.create(628, 352, "platform").setOrigin(0,0).refreshBody();
 	platforms.create(250, 280, "platform").setOrigin(0,0).refreshBody();
+	platforms.create(896, 240, "platform").setOrigin(0,0).refreshBody();
 
 
 	/*Creacion de instancia jugador.*/
@@ -318,7 +319,7 @@ function create(){
 	/*Creacion de assets.*/
     screws = this.physics.add.group({
         key: "Assets",
-        repeat: 12,
+        repeat: 14,
         setXY: { x: 20, y: 0, stepX: 70 }
     });
 
