@@ -243,7 +243,7 @@ function create(){
 		mute: false,
 		volume: 0.0,
 		rate: 1,
-		detune: 0,
+		detune: 0,  
 		seek: 0,
 		loop: true,
 		delay: 0
