@@ -118,6 +118,10 @@ var cameraBoundHeight = 600;
 var cameraStepX = 2;
 var cameraStepY = 4;
 
+var isPlayerDead = false;
+var isPlayerFiring = false;
+//var spaceBar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+
 
 /*Funcion inicial*/
 function init(){
@@ -142,6 +146,9 @@ function preload(){
 	/*Carga de los spritesheets.*/
 	this.load.spritesheet("Eric", "../Sprite_Files/Characters/Spritesheet/Eric_Spritesheet.png", {frameWidth: 32, frameHeight: 48});
 	//this.load.json("Eric", "../Sprite_Files/Characters/Spritesheet/Eric_Spritesheet.png", "../Sprite_Files/Characters/Spritesheet/Eric_Spritesheet.json");
+
+	this.load.spritesheet("Eric_2", "../Sprite_Files/Characters/Spritesheet/Eric_Spritesheet_2.png", {frameWidth: 32, frameHeight: 48});
+	//this.load.json("Eric_2", "../Sprite_Files/Characters/Spritesheet/Eric_Spritesheet_2.png", "../Sprite_Files/Characters/Spritesheet/Eric_Spritesheet_2.json");
 
 	this.load.spritesheet("Assets", "../Sprite_Files/Assets/Spritesheet/Assets_Spritesheet.png", {frameWidth: 32, frameHeight: 32});
 	//this.load.json("Assets", "../Sprite_Files/Assets/Spritesheet/Assets_Spritesheet.png", "../Sprite_Files/Assets/Spritesheet/Assets_Spritesheet.json");
@@ -218,6 +225,7 @@ function create(){
 
 	/*Creacion de los spritesheets en cache.*/
 	let spritesheetEric = this.cache.json.get("Eric");
+	let spritesheetEric2 = this.cache.json.get("Eric_2");
 	let spritesheetAssets = this.cache.json.get("Assets");
 	let spritesheetBallBot = this.cache.json.get("BallBot");
 	let spritesheetClawBot = this.cache.json.get("ClawBot");
@@ -484,6 +492,67 @@ function create(){
 	});
 
 
+	/*Disparar y guardar el arma.*/
+	this.anims.create({
+		key: "fireleft",
+		frames: this.anims.generateFrameNumbers("Eric_2", {start: 28, end: 31}),
+		framerate: 2,
+		repeat: 0
+	});
+
+	this.anims.create({
+		key: "firingleft",
+		frames: this.anims.generateFrameNumbers("Eric_2", {start: 31, end: 34}),
+		framerate: 2,
+		repeat: 0
+	});
+
+	this.anims.create({
+		key: "unfireleft",
+		frames: this.anims.generateFrameNumbers("Eric_2", {start: 34, end: 37}),
+		framerate: 2,
+		repeat: 0
+	});
+
+	this.anims.create({
+		key: "fireright",
+		frames: this.anims.generateFrameNumbers("Eric_2", {start: 38, end: 41}),
+		framerate: 2,
+		repeat: 0
+	});
+
+	this.anims.create({
+		key: "firingright",
+		frames: this.anims.generateFrameNumbers("Eric_2", {start: 41, end: 44}),
+		framerate: 2,
+		repeat: 0
+	});
+
+	this.anims.create({
+		key: "unfireright",
+		frames: this.anims.generateFrameNumbers("Eric_2", {start: 44, end: 47}),
+		framerate: 2,
+		repeat: 0
+	});
+
+
+	/*Morir.*/
+	this.anims.create({
+		key: "deadleft",
+		frames: this.anims.generateFrameNumbers("Eric_2", {start: 0, end: 13}),
+		framerate: 8,
+		repeat: 0
+	});
+
+	this.anims.create({
+		key: "deadright",
+		frames: this.anims.generateFrameNumbers("Eric_2", {start: 14, end: 27}),
+		framerate: 8,
+		repeat: 0
+	});
+
+
+	/*Animacion de los assets.*/
 	this.anims.create({
 		key: "screwA",
 		frames: this.anims.generateFrameNumbers("Assets", {start: 0, end: 8}),
@@ -501,6 +570,7 @@ function create(){
 
 	/*Creacion de controles de teclado.*/
 	cursors = this.input.keyboard.createCursorKeys();
+	this.spacebar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
 
 
 	/*Creacion del marcador.*/
@@ -728,6 +798,54 @@ function update(){
 
 	} else {
 		isPlayerFall = false;
+	}
+
+
+	/*Disparar.*/
+	if ((this.spacebar.isDown) && (!(isPlayerFiring))){
+
+		player.setVelocityX(playerVelocityX);
+		isPlayerFiring = true;
+
+		if (isPlayerLeft) {
+			player.anims.play("fireleft", true);
+
+			console.log("Fire: " + isPlayerFiring);
+
+		} else {
+			player.anims.play("fireright", true);
+
+			console.log("Fire: " + isPlayerFiring);
+		} 
+
+	} else if ((this.spacebar.isDown) && (isPlayerFiring)){
+
+		if (isPlayerLeft) {
+			player.anims.play("firingleft", true);
+
+			console.log("Firing: " + isPlayerFiring);
+
+		} else {
+			player.anims.play("firingright", true);
+
+			console.log("Firing: " + isPlayerFiring);
+		} 
+
+	} else {
+
+		// if (isPlayerLeft) {
+		// 	player.anims.play("unfireleft", true);
+
+		// 	console.log("Unfire: " + isPlayerFiring);
+
+		// } else {
+		// 	player.anims.play("unfireright", true);
+
+		// 	console.log("Unfire: " + isPlayerFiring);
+		// }
+
+		isPlayerFiring = false;
+
 	}
 
 
