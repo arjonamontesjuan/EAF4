@@ -672,6 +672,8 @@ function update(){
 		if ((this.cameras.main.x) < 0 ){
 			this.cameras.main.x += cameraStepX;
 			scoreText.x -= cameraStepX;
+			this.background.x = -(this.cameras.main.x * 0.6);
+			this.decoration.x = (this.cameras.main.x * 0.7);
 		}
 
 		//console.log("Left: " + isPlayerLeft);
@@ -688,6 +690,8 @@ function update(){
 		if ((this.cameras.main.x) < 0 ){
 			this.cameras.main.x += cameraStepX;
 			scoreText.x -= cameraStepX;
+			this.background.x = -(this.cameras.main.x * 0.6);
+			this.decoration.x = (this.cameras.main.x * 0.7);
 		}
 
 		//console.log("Left: " + isPlayerLeft);
@@ -704,6 +708,8 @@ function update(){
 		if ((this.cameras.main.x) > (canvasWidth - worldBoundsWidth)){
 			this.cameras.main.x -= cameraStepX;
 			scoreText.x += cameraStepX;
+			this.background.x = -(this.cameras.main.x * 0.6);
+			this.decoration.x = (this.cameras.main.x * 0.7);
 		}
 
 		//console.log("Left: " + isPlayerLeft);
@@ -717,6 +723,8 @@ function update(){
 		if ((this.cameras.main.x) > (canvasWidth - worldBoundsWidth)){
 			this.cameras.main.x -= cameraStepX;
 			scoreText.x += cameraStepX;
+			this.background.x = -(this.cameras.main.x * 0.6);
+			this.decoration.x = (this.cameras.main.x * 0.7);
 		}
 
 		//console.log("Left: " + isPlayerLeft);
