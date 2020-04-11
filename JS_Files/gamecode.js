@@ -54,7 +54,7 @@ var config = {
 	physics: {
 		default: "arcade",
 		arcade: {
-			gravity: {x: 0, y: 300},
+			gravity: {x: 0, y: 800},
 			debug: false
 		}
 	},
@@ -75,17 +75,14 @@ var config = {
 }
 
 
-/*Inicializacion de variable del juego.*/
-var game = new Phaser.Game(config);
-
 //this.game.scale.pageAlignHorizontally = true;
 //this.game.scale.pageAlignVertically = true;
 //this.game.scale.refresh();
 
 
 /*Declaracion de variables.*/
-var worldBoundsWidth = 1600;
-var worldBoundsHeight = 600;
+const worldBoundsWidth = 1216;
+const worldBoundsHeight = 600;
 
 var background; 
 var decoration;
@@ -100,27 +97,35 @@ var score = 0;
 var scoreText;
 
 var vgmusic;
+var vgsoundeffects;
 
 var gameOver = false;
 var startGame = false;
 
 var isPlayerLeft = false;
 var playerVelocityX = 128;
-var playerVelocityY = 340;
+var playerVelocityY = 550;
 
 var isPlayerCrouch = false;
 var isPlayerFall = false;
 var isPlayerOnAir = false;
 
 //var camera
-var cameraBoundWidth = 1024;
+var cameraBoundWidth = 1216;
 var cameraBoundHeight = 600;
-var cameraStepX = 2;
+var cameraStepX = 1;
 var cameraStepY = 4;
+const cameraMarginX = 40;
+const cameraMarginY = 20;
 
 var isPlayerDead = false;
 var isPlayerFiring = false;
 //var spaceBar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+
+
+/*Inicializacion de variable del juego.*/
+var game = new Phaser.Game(config);
+game.world.setBounds(worldBoundsWidth, worldBoundsHeight);
 
 
 /*Funcion inicial*/
@@ -137,8 +142,8 @@ function preload(){
 	//console.log("preload");
 
 	/*Carga de los archivos de imagen.*/
-	this.load.image("background", "../Sprite_Files/Scenarios/Background/background.png");
-	this.load.image("decoration", "../Sprite_Files/Scenarios/Background/decoration.png");
+	this.load.image("background", "../Sprite_Files/Scenarios/Background/background_01.png");
+	this.load.image("decoration", "../Sprite_Files/Scenarios/Background/decoration_01.png");
 	this.load.image("ground", "../Sprite_Files/Scenarios/Background/ground_01.png");
 	this.load.image("platform", "../Sprite_Files/Scenarios/Background/platform_01.png");
 
@@ -212,13 +217,13 @@ function create(){
 
 
 	/*Creacion de las imagenes.*/
-	this.background = this.add.image(this.width, this.height, "background");
+	this.background = this.add.image(0, 0, "background");
 	this.background.setOrigin(0,0);
-	this.background.setScale(2.1);
+	//this.background.setScale(2.1);
 
-	this.decoration = this.add.image(this.width, this.height, "decoration");
+	this.decoration = this.add.image(0, 0, "decoration");
 	this.decoration.setOrigin(0,0);
-	this.decoration.setScale(1.97);
+	//this.decoration.setScale(1.97);
 	//this.add.image(this.width, 536, "ground").setOrigin(0,0).setScale(1);
 	//this.add.image(500, 350, "platform").setOrigin(0,0);
 
@@ -244,6 +249,18 @@ function create(){
 		delay: 0
 	}
 	vgmusic.play(musicConfig);
+
+	//vgsoundeffects = new Array(this.sound.add("Laser-Shot1"), this.sound.add("Laser-Shot2"), this.sound.add("Laser-Shot3"));
+	vgsoundeffects = this.sound.add("Laser-Shot3");
+	var soundeffectsConfig = {
+		mute: false,
+		volume: 0.5,
+		rate: 1,
+		detune: 0,
+		seek: 0,
+		loop: false,
+		delay: 0
+	}
 
 
 	// this.clankSound01 = this.sound.add("Clank_01");
@@ -301,11 +318,14 @@ function create(){
 
 
 	/*Propiedades fisicas de jugador.*/
+	this.physics.world.bounds.width = worldBoundsWidth;
+	this.physics.world.bounds.height = worldBoundsHeight;
 	player.setBounce(0.1);
 	//this.player.gravity.y = 300;
 	//this.player.body.setGravityY(300);
 	player.setCollideWorldBounds(true);
-	//player.body.onWorldBounds = true;
+	player.body.onWorldBounds = true;
+	player.body.setMass(1);
 
 
 	/*Escalado de jugador.*/
@@ -540,14 +560,14 @@ function create(){
 	this.anims.create({
 		key: "deadleft",
 		frames: this.anims.generateFrameNumbers("Eric_2", {start: 0, end: 13}),
-		framerate: 8,
+		framerate: 1,
 		repeat: 0
 	});
 
 	this.anims.create({
 		key: "deadright",
 		frames: this.anims.generateFrameNumbers("Eric_2", {start: 14, end: 27}),
-		framerate: 8,
+		framerate: 1,
 		repeat: 0
 	});
 
@@ -587,6 +607,8 @@ function create(){
 	this.cameras.main.centerOn(0, 0);
 	//this.cameras.follow(player, Phaser.Camera.FOLLOW_PLATFORMER);
 
+	//sthis.cameras.main.preRender();
+
 }
 
 
@@ -597,6 +619,28 @@ function collectScrew (player, screw){
     /*Puntuacion.*/
     score += 25;
     scoreText.setText("Score: " + score);
+
+
+    /*Eric muere despues de recoger todos los tornillos.*/
+    if ((screws.countActive(true) == 0) && (!(isPlayerDead))) {
+
+    	//player.anims.pause();
+    	isPlayerDead = true;
+
+    	if (isPlayerLeft){
+    		player.anims.play("deadleft", true);
+    	} else {
+    		player.anims.play("deadright", true);
+    	}
+    	player.body.stop();
+    	//game.pause = true;
+    	//alert("Game Over");
+
+    } else {
+    	isPlayerDead = false;
+    }
+
+    console.log("Dead: " + isPlayerDead);
 }
 
 
@@ -604,9 +648,10 @@ function collectScrew (player, screw){
 function update(){
 
 	//console.log("update");
+
 	/*Iniciar animacion de los tornillos.*/
 	if (!(startGame)){
-		//screw.anims.play("screwB");
+		
 		screws.children.iterate(function (child) {
 			if (Phaser.Math.Between(0, 1)<0.5){
 				child.anims.play("screwA");
@@ -626,38 +671,43 @@ function update(){
 
 		if ((this.cameras.main.x) < 0 ){
 			this.cameras.main.x += cameraStepX;
+			scoreText.x -= cameraStepX;
 		}
 
-		console.log("Left: " + isPlayerLeft);
-		console.log("CameraX: " + this.cameras.main.x);
+		//console.log("Left: " + isPlayerLeft);
+		//console.log("CameraX: " + this.cameras.main.x);
 
 	} else if ((cursors.left.isDown) && !(isPlayerLeft)){
 		player.setVelocityX(0);
 		player.anims.play("turnleft",true);
 		isPlayerLeft = true;
+
 		player.setVelocityX(-playerVelocityX);
 		player.anims.play("walkleft", true);
 
 		if ((this.cameras.main.x) < 0 ){
 			this.cameras.main.x += cameraStepX;
+			scoreText.x -= cameraStepX;
 		}
 
-		console.log("Left: " + isPlayerLeft);
-		console.log("CameraX: " + this.cameras.main.x);
+		//console.log("Left: " + isPlayerLeft);
+		//console.log("CameraX: " + this.cameras.main.x);
 
 	} else if ((cursors.right.isDown) && (isPlayerLeft)){
 		player.setVelocityX(0);
 		player.anims.play("turnright",true);
 		isPlayerLeft = false;
+
 		player.setVelocityX(playerVelocityX);
 		player.anims.play("walkright", true);
 
 		if ((this.cameras.main.x) > (canvasWidth - worldBoundsWidth)){
 			this.cameras.main.x -= cameraStepX;
+			scoreText.x += cameraStepX;
 		}
 
-		console.log("Left: " + isPlayerLeft);
-		console.log("CameraX: " + this.cameras.main.x);
+		//console.log("Left: " + isPlayerLeft);
+		//console.log("CameraX: " + this.cameras.main.x);
 
 	} else if ((cursors.right.isDown) && !(isPlayerLeft)){
 		player.setVelocityX(playerVelocityX);
@@ -666,10 +716,11 @@ function update(){
 
 		if ((this.cameras.main.x) > (canvasWidth - worldBoundsWidth)){
 			this.cameras.main.x -= cameraStepX;
+			scoreText.x += cameraStepX;
 		}
 
-		console.log("Left: " + isPlayerLeft);
-		console.log("CameraX: " + this.cameras.main.x);
+		//console.log("Left: " + isPlayerLeft);
+		//console.log("CameraX: " + this.cameras.main.x);
 
 
 	} else {
@@ -698,15 +749,11 @@ function update(){
 
 		if (isPlayerLeft){
 			player.anims.play("crouchleft", true);
-			//player.anims.pause();
-
 		} else {
 			player.anims.play("crouchright", true);
-
 		} 
 
-		console.log("Crouch: " + isPlayerCrouch);
-		
+		//console.log("Crouch: " + isPlayerCrouch);
 
 
 		/*Girarse agachado.*/
@@ -717,13 +764,13 @@ function update(){
 			player.anims.play("turncrouchleft", true);
 			isPlayerLeft = true;
 
-			console.log("Left: " + isPlayerLeft);
+			//console.log("Left: " + isPlayerLeft);
 
 		} else if ((cursors.right.isDown) && (isPlayerLeft)){
 			player.anims.play("turncrouchright", true);
 			isPlayerLeft = false;
 
-			console.log("Left: " + isPlayerLeft);
+			//console.log("Left: " + isPlayerLeft);
 
 		} else if ((cursors.right.isDown) && (!(isPlayerLeft))){
 			//console.log("Left: " + isPlayerLeft);
@@ -740,13 +787,12 @@ function update(){
 
 			if (isPlayerLeft) {
 				player.anims.play("standleft", true);
-
 			} else {
 				player.anims.play("standright", true);
 
 			}
 
-			console.log("Crouch: " + isPlayerCrouch);
+			//console.log("Crouch: " + isPlayerCrouch);
 
 		}
 
@@ -766,7 +812,6 @@ function update(){
 
 		isPlayerOnAir = true;
 	}
-
 
 	if ((isPlayerOnAir) && (!(isPlayerFall))) {
 
@@ -788,12 +833,12 @@ function update(){
 		if (isPlayerLeft) {
 			player.anims.play("fallleft", true);
 
-			console.log("Crouch: " + isPlayerFall);
+			//console.log("Crouch: " + isPlayerFall);
 
 		} else {
 			player.anims.play("fallright", true);
 
-			console.log("Crouch: " + isPlayerFall);
+			//console.log("Crouch: " + isPlayerFall);
 		} 
 
 	} else {
@@ -804,32 +849,56 @@ function update(){
 	/*Disparar.*/
 	if ((this.spacebar.isDown) && (!(isPlayerFiring))){
 
-		player.setVelocityX(playerVelocityX);
+		player.setVelocityX(0);
 		isPlayerFiring = true;
 
 		if (isPlayerLeft) {
 			player.anims.play("fireleft", true);
 
-			console.log("Fire: " + isPlayerFiring);
+			//console.log("Fire: " + isPlayerFiring);
 
 		} else {
 			player.anims.play("fireright", true);
 
-			console.log("Fire: " + isPlayerFiring);
+			//console.log("Fire: " + isPlayerFiring);
 		} 
 
+		// if ((Phaser.Math.Between(0, 1) < 0.33)) {
+		// 	vgsoundeffects[0].play(soundeffectsConfig);
+		// } else if ((Phaser.Math.Between(0, 1) < 0.67)){
+		// 	vgsoundeffects[1].play(soundeffectsConfig);
+		// } else {
+		// 	vgsoundeffects[2].play(soundeffectsConfig);
+		// }
+
+		//vgsoundeffects.play(soundeffectsConfig);
+
+
 	} else if ((this.spacebar.isDown) && (isPlayerFiring)){
+
+		player.setVelocityX(0);
+		isPlayerFiring = true;
 
 		if (isPlayerLeft) {
 			player.anims.play("firingleft", true);
 
-			console.log("Firing: " + isPlayerFiring);
+			//console.log("Firing: " + isPlayerFiring);
 
 		} else {
 			player.anims.play("firingright", true);
 
-			console.log("Firing: " + isPlayerFiring);
+			//console.log("Firing: " + isPlayerFiring);
 		} 
+
+		// if ((Phaser.Math.Between(0, 1) < 0.33)) {
+		// 	vgsoundeffects[0].play(soundeffectsConfig);
+		// } else if ((Phaser.Math.Between(0, 1) < 0.67)){
+		// 	vgsoundeffects[1].play(soundeffectsConfig);
+		// } else {
+		// 	vgsoundeffects[2].play(soundeffectsConfig);
+		// }
+
+		//vgsoundeffects.play(soundeffectsConfig);
 
 	} else {
 
@@ -848,17 +917,14 @@ function update(){
 
 	}
 
-
-	//screws.children.anims.play("screwB");
-
 }
 
 
 /*Actualiza la pantalla y el estado del videojuego. Similar a update.*/
 function render(){
 	//console.log("render");
-}
 
+}
 
 
 // game.state.add("gameplay");
