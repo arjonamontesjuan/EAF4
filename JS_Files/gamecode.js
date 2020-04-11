@@ -250,7 +250,7 @@ function create(){
 	vgmusic = this.sound.add("music");
 	var musicConfig = {
 		mute: false,
-		volume: 0.0,
+		volume: 0.4,
 		rate: 1,
 		detune: 0,
 		seek: 0,
@@ -569,15 +569,15 @@ function create(){
 	this.anims.create({
 		key: "deadleft",
 		frames: this.anims.generateFrameNumbers("Eric_2", {start: 0, end: 13}),
-		framerate: 1,
-		repeat: 0
+		framerate: 4,
+		repeat: -1
 	});
 
 	this.anims.create({
 		key: "deadright",
 		frames: this.anims.generateFrameNumbers("Eric_2", {start: 14, end: 27}),
-		framerate: 1,
-		repeat: 0
+		framerate: 4,
+		repeat: -1
 	});
 
 
@@ -649,19 +649,20 @@ function collectScrew (player, screw){
 
 
     /*Eric muere despues de recoger todos los tornillos.*/
-    if ((screws.length == counterParts) && (!(isPlayerDead))) {
+    if ((screws.countActive(true) === 0) && (!(isPlayerDead))) {
 
-    	//player.anims.pause();
     	isPlayerDead = true;
+    	gameOver = true;
 
     	if (isPlayerLeft){
     		player.anims.play("deadleft", true);
     	} else {
     		player.anims.play("deadright", true);
     	}
-    	player.body.stop();
+
+    	//player.anims.pause();
     	//game.pause = true;
-    	//alert("Game Over");
+    	alert("All the parts were found!" + "\n" + "Game Over");
 
     } else {
     	isPlayerDead = false;
@@ -995,6 +996,9 @@ function update(){
 		isPlayerFiring = false;
 
 	}
+
+
+
 
 }
 
