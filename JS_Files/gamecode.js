@@ -104,7 +104,26 @@ const screwTitleX = 250;
 const timeTextX = canvasWidth/2;
 
 var vgmusic;
+var vgmusic2;
 var vgsoundeffects;
+var musicConfig = {
+	mute: false,
+	volume: 0.4,
+	rate: 1,
+	detune: 0,
+	seek: 0,
+	loop: true,
+	delay: 0
+}
+var soundeffectsConfig = {
+	mute: false,
+	volume: 0.5,
+	rate: 1,
+	detune: 0,
+	seek: 0,
+	loop: false,
+	delay: 0
+}
 
 var gameOver = false;
 var startGame = false;
@@ -182,6 +201,7 @@ function preload(){
 
 	/*Carga los archivos de musica y sonidos FX.*/
 	this.load.audio("music", "../Audio_Files/Music/Quirky-Runner_Looping.mp3");
+	this.load.audio("music2", "../Audio_Files/Music/idle2_music.mp3");
 
 	this.load.audio("Clank_01", "../Audio_Files/SFX/Clank_1.mp3");
 	this.load.audio("Clank_02", "../Audio_Files/SFX/Clank_2.mp3");
@@ -252,28 +272,11 @@ function create(){
 
 	/*Creacion de la musica y los efectos de sonido.*/
 	vgmusic = this.sound.add("music");
-	var musicConfig = {
-		mute: false,
-		volume: 0.4,
-		rate: 1,
-		detune: 0,
-		seek: 0,
-		loop: true,
-		delay: 0
-	}
+	vgmusic2 = this.sound.add("music2");
 	vgmusic.play(musicConfig);
 
 	//vgsoundeffects = new Array(this.sound.add("Laser-Shot1"), this.sound.add("Laser-Shot2"), this.sound.add("Laser-Shot3"));
 	vgsoundeffects = this.sound.add("Laser-Shot3");
-	var soundeffectsConfig = {
-		mute: false,
-		volume: 0.5,
-		rate: 1,
-		detune: 0,
-		seek: 0,
-		loop: false,
-		delay: 0
-	}
 
 
 	// this.clankSound01 = this.sound.add("Clank_01");
@@ -432,11 +435,15 @@ function collectScrew (player, screw){
 
     	isPlayerDead = true;
     	gameOver = true;
+    	vgmusic.stop();
+    	vgmusic2.play(musicConfig);
 
     	if (isPlayerLeft){
     		player.anims.play("deadleft", true);
+    		//player.anims.play("idle2left", true);
     	} else {
     		player.anims.play("deadright", true);
+    		//player.anims.play("idle2right", true);
     	}
 
     	//player.anims.pause();
@@ -600,12 +607,22 @@ function update(){
 		player.setVelocityX(0);
 
 		if (isPlayerLeft){
-			player.anims.play("idle1left", true);
-			//isPlayerLeft = true;
+
+			if (isPlayerDead){
+				player.anims.play("idle2left", true);
+			} else {
+				player.anims.play("idle1left", true);
+				//isPlayerLeft = true;
+			}
 
 		} else {
-			player.anims.play("idle1right", true);
-			//isPlayerLeft = false;
+
+			if (isPlayerDead){
+				player.anims.play("idle2right", true);
+			} else {
+				player.anims.play("idle1right", true);
+				//isPlayerLeft = true;
+			}
 		}
 
 	}
@@ -875,14 +892,14 @@ function createAnimations(anims){
 	anims.create({
 		key: "idle2left",
 		frames: anims.generateFrameNumbers("Eric", {start: 44, end: 53}),
-		framerate: 2,
+		framerate: 0.2,
 		repeat: -1
 	});
 
 	anims.create({
 		key: "idle2right",
 		frames: anims.generateFrameNumbers("Eric", {start: 54, end: 63}),
-		framerate: 2,
+		framerate: 0.2,
 		repeat: -1
 	});
 
