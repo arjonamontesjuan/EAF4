@@ -175,7 +175,7 @@ function preload(){
 	/*Carga de los archivos de imagen.*/
 	this.load.image("background", "../Sprite_Files/Scenarios/Background/background_02.png");
 	this.load.image("decoration", "../Sprite_Files/Scenarios/Background/decoration_01.png");
-	this.load.image("ground", "../Sprite_Files/Scenarios/Background/ground_01.png");
+	this.load.image("ground", "../Sprite_Files/Scenarios/Background/ground_02.png");
 	this.load.image("platform", "../Sprite_Files/Scenarios/Background/platform_01.png");
 
 
